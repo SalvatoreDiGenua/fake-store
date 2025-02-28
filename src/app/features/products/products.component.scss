@@ -15,5 +15,31 @@
     display: grid;
     gap: 25px;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+
+    .fake-store-card {
+      border-radius: var(--fake-store-border-radius-md);
+
+      &:hover {
+        box-shadow: 0 0 10px 0 var(--fake-store-stone-400);
+        scale: 1.05;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .p-card {
+        height: 100%;
+      }
+
+      &__header {
+        border-top-right-radius: var(--fake-store-border-radius-md);
+        border-top-left-radius: var(--fake-store-border-radius-md);
+      }
+
+      &__footer {
+        text-align: end;
+        margin: 0;
+        padding: 0;
+      }
+    }
   }
 }

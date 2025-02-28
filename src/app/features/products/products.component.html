@@ -6,16 +6,18 @@
       }
     } @else {
       @for (product of productsList.value(); track product.id) {
-        <p-card>
+        <p-card class="fake-store-card">
           <ng-template #header>
             <div
+            class="fake-store-card__header"
               style="background: url({{product.image}}) center / contain no-repeat; background-color: #fff; height: 200px;">
             </div>
           </ng-template>
           <ng-template #title> {{product.title}} </ng-template>
-          <ng-template #subtitle> {{product.description}} </ng-template>
           <ng-template #footer>
-            <p-button icon="pi pi-cart-plus" label="Add to cart"></p-button>
+            <h2 class="fake-store-card__footer">
+              {{product.price | currency}}
+            </h2>
           </ng-template>
         </p-card>
       }
