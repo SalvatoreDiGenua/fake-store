@@ -8,10 +8,13 @@ import { PLACEHOLDER_PRODUCT } from '../shared/placeholder/placeholder-product';
   providedIn: 'root'
 })
 export class ProductsService {
+
+  #PRODUCTS_URL = `${environment.BASE_URL}/products`;
+
   getAllProducts() {
     return httpResource<Product[]>(
       {
-        url: `${environment.BASE_URL}/products`,
+        url: this.#PRODUCTS_URL,
         method: 'GET',
       },
       {
@@ -24,7 +27,7 @@ export class ProductsService {
     return resource<Product, { idProduct: number }>({
       request: () => ({ idProduct: idProduct() }),
       loader: ({ request, abortSignal }) =>
-        fetch(`${environment.BASE_URL}/products/${request.idProduct}`, { signal: abortSignal })
+        fetch(`${this.#PRODUCTS_URL}/${request.idProduct}`, { signal: abortSignal })
           .then(response => response.json()),
       defaultValue: PLACEHOLDER_PRODUCT
     })
