@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
     path: 'products',
-    component: AppComponent
+    loadComponent: () => import('./features/products/products.component').then(m => m.ProductsComponent)
+  },
+  {
+    path: 'products/:idProduct/details',
+    loadComponent: () => import('./features/product-details/product-details.component').then(m => m.ProductDetailsComponent)
   },
   {
     path: '**',

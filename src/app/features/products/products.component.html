@@ -1,26 +1,25 @@
 <div class="fake-store-products">
   <div class="fake-store-products__list">
     @if (productsList.isLoading()) {
-      @for (placeholder of productListPlaceholder; track $index) {
-        <p-skeleton width="100%" height="400px" />
-      }
+    @for (placeholder of productListPlaceholder; track $index) {
+    <p-skeleton width="100%" height="400px" />
+    }
     } @else {
-      @for (product of productsList.value(); track product.id) {
-        <p-card class="fake-store-card">
-          <ng-template #header>
-            <div
-            class="fake-store-card__header"
-              style="background: url({{product.image}}) center / contain no-repeat; background-color: #fff; height: 200px;">
-            </div>
-          </ng-template>
-          <ng-template #title> {{product.title}} </ng-template>
-          <ng-template #footer>
-            <h2 class="fake-store-card__footer">
-              {{product.price | currency}}
-            </h2>
-          </ng-template>
-        </p-card>
-      }
+    @for (product of productsList.value(); track product.id) {
+    <p-card class="fake-store-card" (click)="goToProductDetails(product.id)">
+      <ng-template #header>
+        <div class="fake-store-card__header">
+          <app-product-image [urlImageProduct]="product.image"></app-product-image>
+        </div>
+      </ng-template>
+      <ng-template #title> {{product.title}} </ng-template>
+      <ng-template #footer>
+        <h2 class="fake-store-card__footer">
+          {{product.price | currency}}
+        </h2>
+      </ng-template>
+    </p-card>
+    }
     }
   </div>
 </div>

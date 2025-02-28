@@ -1,0 +1,10 @@
+<div class="fake-store-product-details">
+  @let productDetailsValue = productDetails.value();
+  <div class="fake-store-product-details__image">
+    <app-product-image [urlImageProduct]="productDetailsValue.image" [sizeImageProduct]="500"></app-product-image>
+  </div>
+  <div class="fake-store-product-details__info">
+    <h1>{{productDetailsValue.title}}</h1>
+    <h2>{{productDetailsValue.description}}</h2>
+  </div>
+</div>
