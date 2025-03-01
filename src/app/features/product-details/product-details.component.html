@@ -2,7 +2,10 @@
   @let productDetailsValue = productDetails.value();
   <div class="fake-store-product-details__top">
     <app-product-image [urlImageProduct]="productDetailsValue.image" [sizeImageProduct]="500"></app-product-image>
-    <p-rating [ngModel]="rating" [readonly]="true" />
+    <div class="fake-store-product-details__top-info">
+      <p-rating [ngModel]="rating" [readonly]="true" />
+      <h1 class="product-price">{{productDetailsValue.price | currency}}</h1>
+    </div>
   </div>
   <div class="fake-store-product-details__bottom">
     <h1>{{productDetailsValue.title}}</h1>

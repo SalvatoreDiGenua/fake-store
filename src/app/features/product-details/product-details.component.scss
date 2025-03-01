@@ -21,6 +21,13 @@
       width: clamp(450px, 450px, 450px);
       display: block;
     }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
   }
 
   &__bottom {

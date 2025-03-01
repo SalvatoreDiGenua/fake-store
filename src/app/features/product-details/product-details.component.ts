@@ -4,10 +4,11 @@ import { ProductImageComponent } from "../../shared/product-image/product-image.
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { randomIntFromInterval } from '../../shared/utility/functions';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductImageComponent, RatingModule, FormsModule],
+  imports: [ProductImageComponent, RatingModule, FormsModule, CurrencyPipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
