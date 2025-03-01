@@ -9,4 +9,23 @@
   overflow: auto;
   padding: 20px;
   display: flex;
+
+  p-dataview {
+    width: 100%;
+  }
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  &__product {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 10px;
+  }
 }

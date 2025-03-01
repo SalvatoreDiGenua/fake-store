@@ -1,3 +1,21 @@
 <div class="fake-store-cart">
-  {{cartList() | json}}
+  <p-dataview [value]="cartList()">
+    <ng-template #list let-items>
+      <div class="fake-store-cart__list">
+        @for (product of items; track product.id; let last = $last) {
+        <div class="fake-store-cart__product">
+          <app-product-image [urlImageProduct]="product.image" [sizeImageProduct]="100"></app-product-image>
+          <div class="fake-store-cart__product-info">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | currency }}</p>
+            <button (click)="removeProductFromCart($event, product)">Remove</button>
+          </div>
+        </div>
+        @if(!last) {
+        <p-divider />
+        }
+        }
+      </div>
+    </ng-template>  
+  </p-dataview>
 </div>
