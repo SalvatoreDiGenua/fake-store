@@ -1,6 +1,8 @@
-@if(cartCount() > 0) {
-<div class="fake-store-cart scale-in-center">
+@let isCartPage = routerEvents()?.url.includes('cart');
+
+@if(cartCount() > 0 && !isCartPage) {
+<div class="fake-store-button-cart scale-in-center">
   <p-button icon="pi pi-shopping-cart" [rounded]="true" [raised]="true" severity="info" size="large"
-    [badge]="''+cartCount()" />
+    [badge]="''+cartCount()" (onClick)="goToCart()"/>
 </div>
 }

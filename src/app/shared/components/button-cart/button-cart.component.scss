@@ -1,8 +1,9 @@
-.fake-store-cart {
+.fake-store-button-cart {
   width: fit-content;
   position: fixed;
   bottom: 30px;
   right: 30px;
+  z-index: 1000;
 
   p-button button {
     scale: 1.8;

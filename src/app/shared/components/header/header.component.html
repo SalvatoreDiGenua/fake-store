@@ -1,5 +1,5 @@
 <div class="fake-store-header">
-  @let isBackToListProductVisible = routerEvents()?.url.includes('details');
+  @let isBackToListProductVisible = routerEvents()?.url.includes('details') || routerEvents()?.url.includes('cart');
   <p-toolbar>
     <ng-template #start>
       <div class="fake-store-header__back-button">

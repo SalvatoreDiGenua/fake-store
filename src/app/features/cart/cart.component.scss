@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.fake-store-cart {
+  flex: 1 1 10px;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+}
