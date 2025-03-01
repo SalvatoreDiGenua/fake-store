@@ -1,6 +1,14 @@
 .fake-store-header {
   padding: 10px;
 
+  .p-toolbar {
+    gap: 40px;
+
+    .p-toolbar-center {
+      flex: 1 1 auto
+    }
+  }
+
   &__back-button {
     min-width: 150px;
   }
@@ -8,7 +16,7 @@
   p-autocomplete,
   .p-autocomplete,
   .p-autocomplete input {
-    width: 400px;
+    width: 100%;
   }
 
   &__autocomplete {
