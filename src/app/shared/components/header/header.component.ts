@@ -4,15 +4,15 @@ import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { Button } from 'primeng/button';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService } from '../../../services/products.service';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 import { ProductImageComponent } from '../product-image/product-image.component';
-import { Product } from '../../models/product';
+import { Product } from '../../../models/product';
 import { Tooltip } from 'primeng/tooltip';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { FakeStoreReducers } from '../stores/app.reducers';
-import { getProducts } from '../stores/products/products.selectors';
+import { FakeStoreReducers } from '../../stores/app.reducers';
+import { getProducts } from '../../stores/products/products.selectors';
 
 @Component({
   selector: 'app-header',

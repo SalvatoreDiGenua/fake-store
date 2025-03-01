@@ -4,7 +4,7 @@ import { Skeleton } from 'primeng/skeleton';
 import { CardModule } from 'primeng/card';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProductImageComponent } from '../../shared/product-image/product-image.component';
+import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { updateAllProducts } from '../../shared/stores/products/products.actions';
