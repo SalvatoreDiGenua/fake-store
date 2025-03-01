@@ -7,7 +7,10 @@ export const routes: Routes = [
   },
   {
     path: 'products/:idProduct/details',
-    loadComponent: () => import('./features/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+    loadComponent: () => import('./features/product-details/product-details.component').then(m => m.ProductDetailsComponent),
+    data: {
+      showBackToListProduct: true
+    }
   },
   {
     path: '**',

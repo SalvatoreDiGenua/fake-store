@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "./features/header/header.component";
-import { ProductsComponent } from './features/products/products.component';
+import { HeaderComponent } from "./shared/header/header.component";
 import { RouterOutlet } from '@angular/router';
 
 @Component({

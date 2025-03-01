@@ -1,0 +1,24 @@
+<div class="fake-store-header">
+  @let isBackToListProductVisible = routerEvents()?.url.includes('details');
+  <p-toolbar>
+    <ng-template #start>
+      <div class="fake-store-header__back-button">
+        @if(isBackToListProductVisible) {
+          <p-button label="List product" [rounded]="true" severity="secondary" icon="pi pi-angle-left" (onClick)="backToProductList()"/>
+        }
+      </div>
+    </ng-template>
+    <ng-template #center>
+      <p-iconfield iconPosition="left">
+        <p-inputicon styleClass="pi pi-search" />
+        <input type="text" pInputText placeholder="Search" />
+      </p-iconfield>
+    </ng-template>
+    <ng-template #end>
+      <div class="fake-store-header__logo">
+        <img src="fake-store-icon.svg" alt="fake-store-logo" />
+        Fake store
+      </div>
+    </ng-template>
+  </p-toolbar>
+</div>

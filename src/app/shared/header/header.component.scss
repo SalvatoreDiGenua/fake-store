@@ -1,8 +1,14 @@
 .fake-store-header {
   padding: 10px;
+  &__back-button {
+    min-width: 150px;
+  }
   &__logo {
     display: flex;
     align-items: center;
     gap: 10px;
+    img {
+      width: 40px;
+    }
   }
 }
