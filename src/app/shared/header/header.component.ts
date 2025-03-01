@@ -10,6 +10,9 @@ import { ProductImageComponent } from '../product-image/product-image.component'
 import { Product } from '../../models/product';
 import { Tooltip } from 'primeng/tooltip';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { FakeStoreReducers } from '../stores/app.reducers';
+import { getProducts } from '../stores/products/products.selectors';
 
 @Component({
   selector: 'app-header',
@@ -22,8 +25,8 @@ export class HeaderComponent implements OnInit {
   #router: Router = inject(Router)
   routerEvents = toSignal(this.#router.events.pipe(filter(e => e instanceof NavigationEnd)));
   autocompleteFormControl: FormControl = new FormControl<Product>(null);
-  #productsService: ProductsService = inject(ProductsService);
-  productsList = this.#productsService.getAllProducts();
+  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  products = toSignal(this.#store.pipe(select(getProducts)));
   filteredProductList: Product[] = [];
 
   ngOnInit() {
@@ -41,6 +44,6 @@ export class HeaderComponent implements OnInit {
   }
 
   completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
-    this.filteredProductList = this.productsList.value().filter(product => product.title.toLowerCase().includes(autoCompleteCompleteEvent.query.toLowerCase()));
+    this.filteredProductList = this.products().filter(product => product.title.toLowerCase().includes(autoCompleteCompleteEvent.query.toLowerCase()));
   }
 }
