@@ -7,6 +7,9 @@ import { CurrencyPipe } from '@angular/common';
 import { Button } from 'primeng/button';
 import { Product } from '../../models/product';
 import { MessageService } from 'primeng/api';
+import { Store } from '@ngrx/store';
+import { FakeStoreReducers } from '../../shared/stores/app.reducers';
+import { addProductToCart } from '../../shared/stores/cart/cart.actions';
 
 @Component({
   selector: 'app-product-details',
@@ -18,9 +21,11 @@ export class ProductDetailsComponent {
   idProduct = input.required<number>();
   #productsService: ProductsService = inject(ProductsService);
   productDetails = this.#productsService.getSingleProduct(this.idProduct);
+  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #messageService: MessageService = inject(MessageService);
 
   addProductToCart(productDetailsValue: Product) {
+    this.#store.dispatch(addProductToCart({ product: productDetailsValue }));
     this.#messageService.add({ severity: 'success', summary: 'Success', detail: `${productDetailsValue.title} added to cart` });
   }
 }
