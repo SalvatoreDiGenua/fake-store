@@ -6,20 +6,25 @@
 
 .fake-store-product-details {
   padding: 20px;
-  flex: 1 1 auto;
-  display: grid;
-  grid-template-areas: "image info";
-  grid-template-columns: 450px 1fr;
-  column-gap: 40px;
+  flex: 1 1 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
-  &__image {
-    grid-area: image;
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    app-product-image {
+      width: clamp(450px, 450px, 450px);
+      display: block;
+    }
   }
 
-  &__info {
-    grid-area: info;
+  &__bottom {
     display: flex;
     flex-direction: column;
-    gap: 30px;
   }
 }
