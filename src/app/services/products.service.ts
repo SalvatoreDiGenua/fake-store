@@ -1,5 +1,5 @@
-import { httpResource } from '@angular/common/http';
-import { Injectable, resource, Signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Injectable, resource, Signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Product } from '../models/product';
 import { PLACEHOLDER_PRODUCT } from '../shared/placeholder/placeholder-product';
@@ -10,6 +10,7 @@ import { PLACEHOLDER_PRODUCT } from '../shared/placeholder/placeholder-product';
 export class ProductsService {
 
   #PRODUCTS_URL = `${environment.BASE_URL}/products`;
+  #httpClient: HttpClient = inject(HttpClient);
 
   getAllProducts() {
     return httpResource<Product[]>(
@@ -21,6 +22,10 @@ export class ProductsService {
         defaultValue: []
       }
     );
+  }
+
+  getAllProductsRx() {
+    return this.#httpClient.get<Product[]>(this.#PRODUCTS_URL);
   }
 
   getSingleProduct(idProduct: Signal<number>) {

@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map } from "rxjs";
+import { map, switchMap } from "rxjs";
 import { getAllProductsRemote, updateAllProducts } from "./products.actions";
 import { ProductsService } from "../../../services/products.service";
 
@@ -12,10 +12,7 @@ export class ProductsEffects {
 
   productsEffects$ = createEffect(() => this.#actions.pipe(
     ofType(getAllProductsRemote),
-    map(() => {
-      const productsRef = this.#productsService.getAllProducts();
-      return updateAllProducts({ products: productsRef.value() })
-    })
+    switchMap(() => this.#productsService.getAllProductsRx()),
+    map((products) => updateAllProducts({ products }))
   ))
-
 }

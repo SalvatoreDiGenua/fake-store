@@ -13,6 +13,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FakeStoreReducers } from '../../stores/app.reducers';
 import { getProducts } from '../../stores/products/products.selectors';
+import { getAllProductsRemote } from '../../stores/products/products.actions';
 
 @Component({
   selector: 'app-header',
@@ -44,6 +45,9 @@ export class HeaderComponent implements OnInit {
   }
 
   completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
+    if (!this.products() || this.products().length === 0) {
+      this.#store.dispatch(getAllProductsRemote());
+    }
     this.filteredProductList = this.products().filter(product => product.title.toLowerCase().includes(autoCompleteCompleteEvent.query.toLowerCase()));
   }
 }
