@@ -1,5 +1,5 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { productsReducer } from "./products/products.reducers";
+import { productsReducers } from "./products/products.reducers";
 import { Product } from "../../models/product";
 import { cartReducers } from "./cart/cart.reducers";
 
@@ -9,6 +9,6 @@ export interface FakeStoreReducers {
 }
 
 export const fakeStoreReducers: ActionReducerMap<FakeStoreReducers> = {
-  products: productsReducer,
+  products: productsReducers,
   cart: cartReducers,
 }
