@@ -3,12 +3,14 @@
   <div class="fake-store-product-details__top">
     <app-product-image [urlImageProduct]="productDetailsValue.image" [sizeImageProduct]="500"></app-product-image>
     <div class="fake-store-product-details__top-info">
-      <p-rating [ngModel]="rating" [readonly]="true" />
+      <p-rating class="product-rating" [ngModel]="productDetailsValue.rating.rate" [readonly]="true" />
+      <h1 class="product-title">{{productDetailsValue.title}}</h1>
+      <small class="product-category">{{productDetailsValue.category}}</small>
       <h1 class="product-price">{{productDetailsValue.price | currency}}</h1>
+      <p-button label="Add to cart" [rounded]="true" [raised]="true" icon="pi pi-cart-plus" (onClick)="addProductToCart(productDetailsValue)"/>
     </div>
   </div>
   <div class="fake-store-product-details__bottom">
-    <h1>{{productDetailsValue.title}}</h1>
     <h2>{{productDetailsValue.description}}</h2>
   </div>
 </div>
