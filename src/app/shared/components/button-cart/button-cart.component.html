@@ -1,0 +1,6 @@
+@if(cartCount() > 0) {
+<div class="fake-store-cart scale-in-center">
+  <p-button icon="pi pi-shopping-cart" [rounded]="true" [raised]="true" severity="info" size="large"
+    [badge]="''+cartCount()" />
+</div>
+}
