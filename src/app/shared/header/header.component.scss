@@ -1,12 +1,30 @@
 .fake-store-header {
   padding: 10px;
+
   &__back-button {
     min-width: 150px;
   }
+
+  p-autocomplete,
+  .p-autocomplete,
+  .p-autocomplete input {
+    width: 400px;
+  }
+
+  &__autocomplete {
+    &-product {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 30px 1fr;
+      gap: 15px;
+    }
+  }
+
   &__logo {
     display: flex;
     align-items: center;
     gap: 10px;
+
     img {
       width: 40px;
     }
