@@ -24,7 +24,6 @@ export class CartComponent {
   #messageService: MessageService = inject(MessageService);
   #confirmationService: ConfirmationService = inject(ConfirmationService);
 
-
   removeProductFromCart(event: Event, product: Product) {
     this.#confirmationService.confirm({
       target: event.target as EventTarget,
@@ -33,7 +32,7 @@ export class CartComponent {
       closable: true,
       closeOnEscape: true,
       icon: 'pi pi-exclamation-triangle',
-      rejectButtonProps: {  
+      rejectButtonProps: {
         label: 'Cancel',
         severity: 'secondary',
         outlined: true,
@@ -43,8 +42,12 @@ export class CartComponent {
       },
       accept: () => {
         this.#store.dispatch(removeProductFromCart({ product }));
-        this.#messageService.add({ severity: 'info', summary: 'Success', detail: `${product.title} removed from cart` });
-      }
+        this.#messageService.add({
+          severity: 'info',
+          summary: 'Success',
+          detail: `${product.title} removed from cart`,
+        });
+      },
     });
   }
 }
