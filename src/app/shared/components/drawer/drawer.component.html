@@ -1,0 +1,22 @@
+<p-drawer
+  position="right"
+  styleClass="fake-store-drawer"
+  [visible]="visible()"
+  (visibleChange)="toggleVisible($event)"
+>
+  <ng-template #header>
+    <div class="fake-store-header__logo">
+      <img src="fake-store-icon.svg" alt="fake-store-logo" />
+      <h2>Fake store</h2>
+    </div>
+  </ng-template>
+
+  <p-tree [value]="treeNodes()" styleClass="w-full md:w-[30rem]">
+    <ng-template let-node pTemplate="default">
+      {{ node.label }}
+    </ng-template>
+    <ng-template let-node pTemplate="url">
+      <p-button [label]="node.label" [link]="true" severity="contrast" />
+    </ng-template>
+  </p-tree>
+</p-drawer>
