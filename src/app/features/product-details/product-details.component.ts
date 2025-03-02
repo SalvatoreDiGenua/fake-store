@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { addProductToCart } from '../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +21,8 @@ import { Skeleton } from 'primeng/skeleton';
     FormsModule,
     CurrencyPipe,
     Button,
-    Skeleton
+    Skeleton,
+    FieldsetModule
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
