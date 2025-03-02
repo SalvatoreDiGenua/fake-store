@@ -14,6 +14,7 @@ import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
 import { Button } from 'primeng/button';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawer',
@@ -41,12 +42,18 @@ export class DrawerComponent {
     });
     return _treeNodes;
   });
+  #router = inject(Router);
+  #activatedRoute = inject(ActivatedRoute);
 
   toggleVisible(value: boolean) {
     this.visible.set(value);
   }
 
-  nodeUrlClick(node: TreeNode) {
-    console.log(node);
+  protected nodeUrlClick(node: TreeNode) {
+    this.visible.set(false);
+    this.#router.navigate(['/products'], {
+      relativeTo: this.#activatedRoute,
+      queryParams: { productCategory: node.data },
+    });
   }
 }

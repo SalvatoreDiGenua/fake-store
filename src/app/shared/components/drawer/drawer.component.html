@@ -16,7 +16,7 @@
       {{ node.label }}
     </ng-template>
     <ng-template let-node pTemplate="url">
-      <p-button [label]="node.label" [link]="true" severity="contrast" />
+      <p-button [label]="node.label" [link]="true" severity="contrast" (onClick)="nodeUrlClick(node)"/>
     </ng-template>
   </p-tree>
 </p-drawer>

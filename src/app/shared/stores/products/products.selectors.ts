@@ -1,3 +1,4 @@
+import { createSelector } from '@ngrx/store';
 import { Product } from '../../../models/product';
 import { FakeStoreReducers } from '../app.reducers';
 
@@ -10,3 +11,10 @@ export const getProductCategories = (state: FakeStoreReducers): string[] => [
     new Set<string>(),
   ),
 ];
+
+export const getProductsByCategory = (category: string) =>
+  createSelector(getProducts, (products) =>
+    (products || [])
+      .slice()
+      .filter((el) => (category ? el.category === category : true)),
+  );
