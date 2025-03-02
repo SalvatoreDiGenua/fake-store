@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CurrencyPipe } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { Card } from 'primeng/card';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-cart',
@@ -20,6 +21,7 @@ import { Card } from 'primeng/card';
     CurrencyPipe,
     DividerModule,
     Card,
+    Button
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',

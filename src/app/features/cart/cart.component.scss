@@ -12,6 +12,7 @@
 
   p-card {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   p-dataview {
@@ -38,5 +39,21 @@
     grid-template-columns: 100px 1fr;
     align-items: center;
     gap: 10px;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &-row1 {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-row2 {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }

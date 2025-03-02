@@ -11,11 +11,17 @@
               [sizeImageProduct]="100"
             ></app-product-image>
             <div class="fake-store-cart__product-info">
-              <h3>{{ product.title }}</h3>
-              <p>{{ product.price | currency }}</p>
-              <button (click)="removeProductFromCart($event, product)">
-                Remove
-              </button>
+              <div class="fake-store-cart__product-row1">
+                <h3>{{ product.title }}</h3>
+                <h3>{{ product.price | currency }}</h3>
+              </div>
+              <div class="fake-store-cart__product-row2">
+                <p-button
+                  icon="pi pi-trash"
+                  (click)="removeProductFromCart($event, product)"
+                  severity="danger"
+                />
+              </div>
             </div>
           </div>
           @if(!last) {
