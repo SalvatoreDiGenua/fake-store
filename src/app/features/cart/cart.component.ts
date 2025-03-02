@@ -20,6 +20,7 @@ import { CurrencyPipe } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
 import { Card } from 'primeng/card';
 import { Button } from 'primeng/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -30,6 +31,7 @@ import { Button } from 'primeng/button';
     DividerModule,
     Card,
     Button,
+    RouterLink
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',

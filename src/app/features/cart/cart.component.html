@@ -8,6 +8,12 @@
         </h2>
         @if (cartTotalToSpend() > 0) {
           <h2>Total {{ cartTotalToSpend() | currency }}</h2>
+        } @else {
+          <p-button
+            [link]="true"
+            label="Go to shopping!"
+            routerLink="/products"
+          />
         }
       </div>
     </ng-template>
@@ -38,6 +44,16 @@
               <p-divider />
             }
           }
+        </div>
+      </ng-template>
+      <ng-template #empty>
+        <div class="fake-store-cart__empty">
+          <h3>Cart is empty</h3>
+          <p-button
+            [link]="true"
+            label="Go to shopping!"
+            routerLink="/products"
+          />
         </div>
       </ng-template>
     </p-dataview>
