@@ -6,9 +6,7 @@ export const getProducts = (state: FakeStoreReducers): Product[] =>
   state.products || [];
 
 export const getProductCategories = createSelector(getProducts, (products) => [
-  ...products
-    .slice()
-    .reduce((acc, el) => acc.add(el.category), new Set<string>()),
+  ...products.reduce((acc, el) => acc.add(el.category), new Set<string>()),
 ]);
 
 export const getProductsByQuery = (query: string) =>

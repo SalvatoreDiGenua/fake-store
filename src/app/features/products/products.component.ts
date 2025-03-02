@@ -2,6 +2,7 @@ import {
   Component,
   HostBinding,
   inject,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { Skeleton } from 'primeng/skeleton';
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
 import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import { getProducts } from '../../shared/stores/products/products.selectors';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { getProductsByCategory } from '../../shared/stores/products/products.selectors';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-products',
@@ -23,8 +25,14 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class ProductsComponent {
   @HostBinding('class') class = 'host-fake-store-products';
+  productCategory = input('');
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
-  productsList = toSignal(this.#store.select(getProducts));
+  productsList = rxResource<Product[], { productCategory: string }>({
+    request: () => ({ productCategory: this.productCategory() }),
+    loader: ({ request }) =>
+      this.#store.select(getProductsByCategory(request.productCategory)),
+    defaultValue: [],
+  });
   productListPlaceholder = Array(10);
   #router = inject(Router);
 
