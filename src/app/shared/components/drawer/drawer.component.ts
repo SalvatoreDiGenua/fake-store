@@ -28,7 +28,7 @@ export class DrawerComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   productCategories = toSignal(this.#store.pipe(select(getProductCategories)));
   treeNodes: Signal<TreeNode[]> = computed(() => {
-    const _treeNodes: TreeNode[] = [];
+    const _treeNodes: TreeNode<{ url: string; queryParams?: string }>[] = [];
     _treeNodes.push({
       label: 'Product categories',
       icon: PrimeIcons.SHOPPING_BAG,
@@ -36,9 +36,15 @@ export class DrawerComponent {
       children: this.productCategories().map((el) => ({
         label: el,
         type: 'url',
-        data: el,
+        data: { url: '/products', queryParams: el },
         icon: PrimeIcons.ASTERISK,
       })),
+    });
+    _treeNodes.push({
+      label: 'Cart',
+      icon: PrimeIcons.SHOPPING_CART,
+      type: 'url',
+      data: { url: '/cart' },
     });
     return _treeNodes;
   });
@@ -49,11 +55,13 @@ export class DrawerComponent {
     this.visible.set(value);
   }
 
-  protected nodeUrlClick(node: TreeNode) {
+  protected nodeUrlClick(
+    node: TreeNode<{ url: string; queryParams?: string }>,
+  ) {
     this.visible.set(false);
-    this.#router.navigate(['/products'], {
+    this.#router.navigate([node.data.url], {
       relativeTo: this.#activatedRoute,
-      queryParams: { productCategory: node.data },
+      queryParams: { productCategory: node.data.queryParams },
     });
   }
 }
