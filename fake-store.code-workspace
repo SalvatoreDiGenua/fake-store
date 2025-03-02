@@ -5,6 +5,8 @@
 		}
 	],
 	"settings": {
-		"editor.tabSize": 2
+		"editor.tabSize": 2,
+		"editor.stickyScroll.scrollWithEditor": true,
+		"workbench.tree.enableStickyScroll": false
 	}
 }
