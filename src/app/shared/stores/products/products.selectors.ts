@@ -7,6 +7,6 @@ export const getProducts = (state: FakeStoreReducers): Product[] =>
 export const getProductCategories = (state: FakeStoreReducers): string[] => [
   ...(state.products || []).reduce(
     (acc, el) => acc.add(el.category),
-    new Set<string>()
+    new Set<string>(),
   ),
 ];

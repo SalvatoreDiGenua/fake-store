@@ -1,4 +1,10 @@
-import { Component, effect, HostBinding, inject, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  effect,
+  HostBinding,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Skeleton } from 'primeng/skeleton';
 import { CardModule } from 'primeng/card';
@@ -28,8 +34,10 @@ export class ProductsComponent {
     if (this.productsList.isLoading()) {
       return;
     }
-    this.#store.dispatch(updateAllProducts({ products: this.productsList.value() }));
-  })
+    this.#store.dispatch(
+      updateAllProducts({ products: this.productsList.value() }),
+    );
+  });
 
   goToProductDetails(idProduct: number) {
     this.#router.navigateByUrl(`products/${idProduct}/details`);

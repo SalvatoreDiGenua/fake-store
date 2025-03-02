@@ -1,6 +1,14 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { routes } from './app.routes';
-import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeng/themes/lara';
@@ -23,12 +31,16 @@ export const appConfig: ApplicationConfig = {
         options: {
           prefix: 'fake-store',
           darkModeSelector: 'system',
-          cssLayer: false
-        }
-      }
+          cssLayer: false,
+        },
+      },
     }),
     provideStore(fakeStoreReducers),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode(), name: 'FakeStore' }),
-    provideEffects(ProductsEffects)
-  ]
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      name: 'FakeStore',
+    }),
+    provideEffects(ProductsEffects),
+  ],
 };

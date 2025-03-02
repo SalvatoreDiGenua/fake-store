@@ -22,7 +22,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     CurrencyPipe,
     Button,
     Skeleton,
-    FieldsetModule
+    FieldsetModule,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',

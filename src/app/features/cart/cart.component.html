@@ -6,8 +6,8 @@
           Cart
           {{ cartList().length > 0 ? `(${cartList().length} Articles)` : '' }}
         </h2>
-        @if(cartTotalToSpend() > 0) {
-        <h2>Total {{ cartTotalToSpend() | currency }}</h2>
+        @if (cartTotalToSpend() > 0) {
+          <h2>Total {{ cartTotalToSpend() | currency }}</h2>
         }
       </div>
     </ng-template>
@@ -15,28 +15,29 @@
       <ng-template #list let-items>
         <div class="fake-store-cart__list">
           @for (product of items; track product.id; let last = $last) {
-          <div class="fake-store-cart__product">
-            <app-product-image
-              [urlImageProduct]="product.image"
-              [sizeImageProduct]="100"
-            ></app-product-image>
-            <div class="fake-store-cart__product-info">
-              <div class="fake-store-cart__product-row1">
-                <h3>{{ product.title }}</h3>
-                <h3>{{ product.price | currency }}</h3>
-              </div>
-              <div class="fake-store-cart__product-row2">
-                <p-button
-                  icon="pi pi-trash"
-                  (click)="removeProductFromCart($event, product)"
-                  severity="danger"
-                />
+            <div class="fake-store-cart__product">
+              <app-product-image
+                [urlImageProduct]="product.image"
+                [sizeImageProduct]="100"
+              ></app-product-image>
+              <div class="fake-store-cart__product-info">
+                <div class="fake-store-cart__product-row1">
+                  <h3>{{ product.title }}</h3>
+                  <h3>{{ product.price | currency }}</h3>
+                </div>
+                <div class="fake-store-cart__product-row2">
+                  <p-button
+                    icon="pi pi-trash"
+                    (click)="removeProductFromCart($event, product)"
+                    severity="danger"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          @if(!last) {
-          <p-divider />
-          } }
+            @if (!last) {
+              <p-divider />
+            }
+          }
         </div>
       </ng-template>
     </p-dataview>

@@ -2,8 +2,6 @@ import {
   Component,
   computed,
   inject,
-  input,
-  linkedSignal,
   signal,
   Signal,
   ViewEncapsulation,

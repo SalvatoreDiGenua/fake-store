@@ -5,10 +5,9 @@ import { Product } from '../models/product';
 import { PLACEHOLDER_PRODUCT } from '../shared/placeholder/placeholder-product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
-
   #PRODUCTS_URL = `${environment.BASE_URL}/products`;
   #httpClient: HttpClient = inject(HttpClient);
 
@@ -19,8 +18,8 @@ export class ProductsService {
         method: 'GET',
       },
       {
-        defaultValue: []
-      }
+        defaultValue: [],
+      },
     );
   }
 
@@ -32,9 +31,10 @@ export class ProductsService {
     return resource<Product, { idProduct: number }>({
       request: () => ({ idProduct: idProduct() }),
       loader: ({ request, abortSignal }) =>
-        fetch(`${this.#PRODUCTS_URL}/${request.idProduct}`, { signal: abortSignal })
-          .then(response => response.json()),
-      defaultValue: PLACEHOLDER_PRODUCT
-    })
+        fetch(`${this.#PRODUCTS_URL}/${request.idProduct}`, {
+          signal: abortSignal,
+        }).then((response) => response.json()),
+      defaultValue: PLACEHOLDER_PRODUCT,
+    });
   }
 }

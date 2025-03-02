@@ -1,4 +1,4 @@
-import { Product } from "../../models/product";
+import { Product } from '../../models/product';
 
 export const PLACEHOLDER_PRODUCT: Product = {
   id: -1,
@@ -9,6 +9,6 @@ export const PLACEHOLDER_PRODUCT: Product = {
   image: '',
   rating: {
     rate: 0,
-    count: 0
-  }
-}
+    count: 0,
+  },
+};

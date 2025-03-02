@@ -17,10 +17,12 @@ import { filter } from 'rxjs';
 export class ButtonCartComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   cartCount = toSignal(this.#store.select(getCartCount));
-  #router: Router = inject(Router)
-  routerEvents = toSignal(this.#router.events.pipe(filter(e => e instanceof NavigationEnd)));
+  #router: Router = inject(Router);
+  routerEvents = toSignal(
+    this.#router.events.pipe(filter((e) => e instanceof NavigationEnd)),
+  );
 
   goToCart() {
     this.#router.navigate(['cart']);
   }
-} 
+}

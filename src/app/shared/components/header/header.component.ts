@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -27,7 +27,7 @@ import { DrawerComponent } from '../drawer/drawer.component';
     ReactiveFormsModule,
     ProductImageComponent,
     Tooltip,
-    DrawerComponent
+    DrawerComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -36,7 +36,7 @@ import { DrawerComponent } from '../drawer/drawer.component';
 export class HeaderComponent implements OnInit {
   #router: Router = inject(Router);
   routerEvents = toSignal(
-    this.#router.events.pipe(filter((e) => e instanceof NavigationEnd))
+    this.#router.events.pipe(filter((e) => e instanceof NavigationEnd)),
   );
   autocompleteFormControl: FormControl = new FormControl<Product>(null);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
     this.filteredProductList = this.products().filter((product) =>
       product.title
         .toLowerCase()
-        .includes(autoCompleteCompleteEvent.query.toLowerCase())
+        .includes(autoCompleteCompleteEvent.query.toLowerCase()),
     );
   }
 }
