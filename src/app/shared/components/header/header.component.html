@@ -19,7 +19,7 @@
     <ng-template #center>
       <p-autocomplete
         [formControl]="autocompleteFormControl"
-        [suggestions]="filteredProductList"
+        [suggestions]="filteredProductList()"
         optionLabel="title"
         field="title"
         placeholder="Search product"

@@ -1,8 +1,14 @@
-import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs';
+import { filter, firstValueFrom } from 'rxjs';
 import { Button } from 'primeng/button';
 import {
   AutoCompleteCompleteEvent,
@@ -14,8 +20,10 @@ import { Tooltip } from 'primeng/tooltip';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FakeStoreReducers } from '../../stores/app.reducers';
-import { getProducts } from '../../stores/products/products.selectors';
-import { getAllProductsRemote } from '../../stores/products/products.actions';
+import {
+  getProducts,
+  getProductsByQuery,
+} from '../../stores/products/products.selectors';
 import { DrawerComponent } from '../drawer/drawer.component';
 
 @Component({
@@ -41,7 +49,7 @@ export class HeaderComponent implements OnInit {
   autocompleteFormControl: FormControl = new FormControl<Product>(null);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   products = toSignal(this.#store.pipe(select(getProducts)));
-  filteredProductList: Product[] = [];
+  filteredProductList = signal<Product[]>([]);
 
   ngOnInit() {
     this.autocompleteFormControl.valueChanges
@@ -57,14 +65,11 @@ export class HeaderComponent implements OnInit {
     this.#router.navigate(['products', product.id, 'details']);
   };
 
-  completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
-    if (!this.products() || this.products().length === 0) {
-      this.#store.dispatch(getAllProductsRemote());
-    }
-    this.filteredProductList = this.products().filter((product) =>
-      product.title
-        .toLowerCase()
-        .includes(autoCompleteCompleteEvent.query.toLowerCase()),
+  async completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
+    this.filteredProductList.set(
+      await firstValueFrom(
+        this.#store.select(getProductsByQuery(autoCompleteCompleteEvent.query)),
+      ),
     );
   }
 }

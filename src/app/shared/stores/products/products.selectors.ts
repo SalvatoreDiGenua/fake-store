@@ -11,9 +11,14 @@ export const getProductCategories = createSelector(getProducts, (products) => [
     .reduce((acc, el) => acc.add(el.category), new Set<string>()),
 ]);
 
+export const getProductsByQuery = (query: string) =>
+  createSelector(getProducts, (products) =>
+    products.filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase()),
+    ),
+  );
+
 export const getProductsByCategory = (category: string) =>
   createSelector(getProducts, (products) =>
-    products
-      .slice()
-      .filter((el) => (category ? el.category === category : true)),
+    products.filter((el) => (category ? el.category === category : true)),
   );

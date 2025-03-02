@@ -1,11 +1,11 @@
 <div class="fake-store-products">
   <div class="fake-store-products__list">
-    @if (productsList.isLoading()) {
+    @if (productsList().length === 0) {
       @for (placeholder of productListPlaceholder; track $index) {
         <p-skeleton width="100%" height="400px" />
       }
     } @else {
-      @for (product of productsList.value(); track product.id) {
+      @for (product of productsList(); track product.id) {
         <p-card
           class="fake-store-card"
           (click)="goToProductDetails(product.id)"
