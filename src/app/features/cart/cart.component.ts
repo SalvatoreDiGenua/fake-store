@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, inject, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getCart } from '../../shared/stores/cart/cart.selectors';
@@ -10,15 +10,23 @@ import { ProductImageComponent } from '../../shared/components/product-image/pro
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CurrencyPipe } from '@angular/common';
 import { DividerModule } from 'primeng/divider';
+import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-cart',
-  imports: [DataViewModule, ProductImageComponent, CurrencyPipe, DividerModule],
+  imports: [
+    DataViewModule,
+    ProductImageComponent,
+    CurrencyPipe,
+    DividerModule,
+    Card,
+  ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class CartComponent {
+  @HostBinding('class') class = 'host-fake-store-cart';
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   cartList = toSignal(this.#store.select(getCart));
   #messageService: MessageService = inject(MessageService);

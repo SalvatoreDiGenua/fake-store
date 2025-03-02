@@ -1,21 +1,28 @@
 <div class="fake-store-cart">
-  <p-dataview [value]="cartList()">
-    <ng-template #list let-items>
-      <div class="fake-store-cart__list">
-        @for (product of items; track product.id; let last = $last) {
-        <div class="fake-store-cart__product">
-          <app-product-image [urlImageProduct]="product.image" [sizeImageProduct]="100"></app-product-image>
-          <div class="fake-store-cart__product-info">
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.price | currency }}</p>
-            <button (click)="removeProductFromCart($event, product)">Remove</button>
+  <p-card>
+    <ng-template #title> Cart </ng-template>
+    <p-dataview [value]="cartList()" emptyMessage="Cart is empty">
+      <ng-template #list let-items>
+        <div class="fake-store-cart__list">
+          @for (product of items; track product.id; let last = $last) {
+          <div class="fake-store-cart__product">
+            <app-product-image
+              [urlImageProduct]="product.image"
+              [sizeImageProduct]="100"
+            ></app-product-image>
+            <div class="fake-store-cart__product-info">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | currency }}</p>
+              <button (click)="removeProductFromCart($event, product)">
+                Remove
+              </button>
+            </div>
           </div>
+          @if(!last) {
+          <p-divider />
+          } }
         </div>
-        @if(!last) {
-        <p-divider />
-        }
-        }
-      </div>
-    </ng-template>  
-  </p-dataview>
+      </ng-template>
+    </p-dataview>
+  </p-card>
 </div>

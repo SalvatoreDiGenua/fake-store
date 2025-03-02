@@ -1,4 +1,4 @@
-:host {
+.host-fake-store-cart {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -10,8 +10,17 @@
   padding: 20px;
   display: flex;
 
+  p-card {
+    width: 100%;
+  }
+
   p-dataview {
     width: 100%;
+    height: 100%;
+    .p-dataview-emptymessage {
+      padding: 20px;
+      text-align: center;
+    }
   }
 
   &__list {
@@ -19,7 +28,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
+    &:not(:empty) {
+      padding: 10px;
+    }
   }
 
   &__product {
