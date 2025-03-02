@@ -1,6 +1,16 @@
 <div class="fake-store-cart">
   <p-card>
-    <ng-template #title> Cart </ng-template>
+    <ng-template #title>
+      <div class="fake-store-cart__header">
+        <h2>
+          Cart
+          {{ cartList().length > 0 ? `(${cartList().length} Articles)` : '' }}
+        </h2>
+        @if(cartTotalToSpend() > 0) {
+        <h2>Total {{ cartTotalToSpend() | currency }}</h2>
+        }
+      </div>
+    </ng-template>
     <p-dataview [value]="cartList()" emptyMessage="Cart is empty">
       <ng-template #list let-items>
         <div class="fake-store-cart__list">

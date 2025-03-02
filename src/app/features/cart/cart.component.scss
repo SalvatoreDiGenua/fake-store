@@ -24,6 +24,11 @@
     }
   }
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__list {
     width: 100%;
     display: flex;
@@ -37,23 +42,25 @@
   &__product {
     display: grid;
     grid-template-columns: 100px 1fr;
-    align-items: center;
     gap: 10px;
 
     &-info {
+      height: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      justify-content: space-between;
     }
 
     &-row1 {
       display: flex;
       justify-content: space-between;
+      gap: 10px;
     }
 
     &-row2 {
       display: flex;
       justify-content: flex-end;
+      gap: 10px;
     }
   }
 }

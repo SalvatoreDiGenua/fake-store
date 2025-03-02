@@ -1,7 +1,15 @@
-import { Component, HostBinding, inject, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import { getCart } from '../../shared/stores/cart/cart.selectors';
+import {
+  getCart,
+  getCartTotalToSpend,
+} from '../../shared/stores/cart/cart.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DataViewModule } from 'primeng/dataview';
 import { Product } from '../../models/product';
@@ -21,7 +29,7 @@ import { Button } from 'primeng/button';
     CurrencyPipe,
     DividerModule,
     Card,
-    Button
+    Button,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
@@ -31,6 +39,7 @@ export class CartComponent {
   @HostBinding('class') class = 'host-fake-store-cart';
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   cartList = toSignal(this.#store.select(getCart));
+  cartTotalToSpend = toSignal(this.#store.select(getCartTotalToSpend));
   #messageService: MessageService = inject(MessageService);
   #confirmationService: ConfirmationService = inject(ConfirmationService);
 
