@@ -10,7 +10,11 @@ export const scrollIntoView = (element: HTMLElement, withAnimation = false) => {
   if (!element) {
     return;
   }
-  element.scrollIntoView({ behavior: 'smooth' });
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest',
+    inline: 'nearest',
+  });
   if (withAnimation) {
     element.classList.add('jello-horizontal');
   }
