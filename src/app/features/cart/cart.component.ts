@@ -12,8 +12,9 @@ import {
   getCartCount,
   getCartGrouped,
   getCartTotalToSpend,
+  getSingleItemCart,
 } from '../../shared/stores/cart/cart.selectors';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { DataViewModule } from 'primeng/dataview';
 import { Product } from '../../models/product';
 import {
@@ -57,9 +58,16 @@ export class CartComponent {
   cartTotalToSpend = toSignal(this.#store.select(getCartTotalToSpend));
   #messageService: MessageService = inject(MessageService);
   #confirmationService: ConfirmationService = inject(ConfirmationService);
-  cartItemPopover = signal<ItemCart>(null);
+  idCartItemPopover = signal<number>(-1);
+  cartItemPopover = rxResource({
+    request: () => ({ idCartItemPopover: this.idCartItemPopover() }),
+    loader: ({ request }) =>
+      this.#store.select(getSingleItemCart(request.idCartItemPopover)),
+    defaultValue: null,
+  });
 
   removeProductFromCart(event: Event, product: Product) {
+    this.popoverRef().hide();
     this.#confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Are you sure that you want to proceed?',
@@ -86,8 +94,8 @@ export class CartComponent {
     });
   }
 
-  showPopoverItemCartCount(event: Event, itemCart: ItemCart) {
-    this.cartItemPopover.set(itemCart);
+  showPopoverItemCartCount(event: Event, idItemCart: number) {
+    this.idCartItemPopover.set(idItemCart);
     this.popoverRef().toggle(event);
   }
 

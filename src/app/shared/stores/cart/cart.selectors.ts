@@ -27,3 +27,8 @@ export const getCartGrouped = createSelector(getCart, (cartList) => {
   });
   return itemsCart;
 });
+
+export const getSingleItemCart = (idItemCart: number) =>
+  createSelector(getCartGrouped, (cartList) =>
+    cartList.find((el) => el.id === idItemCart),
+  );

@@ -75,6 +75,14 @@
   &__popover {
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 15px;
+    &-actions {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-evenly;
+    }
   }
 }

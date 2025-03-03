@@ -41,7 +41,7 @@
                       severity="secondary"
                       [rounded]="true"
                       variant="text"
-                      (onClick)="showPopoverItemCartCount($event, cartItem)"
+                      (onClick)="showPopoverItemCartCount($event, cartItem.id)"
                     />
                   </div>
                 </div>
@@ -73,32 +73,39 @@
     </p-dataview>
   </p-card>
 
-  <p-popover
-    #popoverCartItem
-    title="Product quantity"
-    (onHide)="cartItemPopover.set(null)"
-  >
-    @if (cartItemPopover()) {
+  <p-popover #popoverCartItem (onHide)="idCartItemPopover.set(-1)">
+    @if (cartItemPopover.value()) {
       <div class="fake-store-cart__popover">
-        <p-button
-          [icon]="cartItemPopover().count === 1 ? 'pi pi-trash' : 'pi pi-minus'"
-          severity="danger"
-          [rounded]="true"
-          [severity]="cartItemPopover().count === 1 ? 'danger' : 'secondary'"
-          (onClick)="
-            cartItemPopover().count === 1
-              ? removeProductFromCart($event, cartItemPopover())
-              : decrementProductCount(cartItemPopover())
-          "
-        />
-        {{ cartItemPopover().count }}
-        <p-button
-          icon="pi pi-plus"
-          severity="danger"
-          [rounded]="true"
-          severity="secondary"
-          (onClick)="incrementProductCount(cartItemPopover())"
-        />
+        <div class="fake-store-cart__popover-header">
+          <h3>Product quantity</h3>
+        </div>
+        <div class="fake-store-cart__popover-actions">
+          <p-button
+            [icon]="
+              cartItemPopover.value().count === 1
+                ? 'pi pi-trash'
+                : 'pi pi-minus'
+            "
+            severity="danger"
+            [rounded]="true"
+            [severity]="
+              cartItemPopover.value().count === 1 ? 'danger' : 'secondary'
+            "
+            (onClick)="
+              cartItemPopover.value().count === 1
+                ? removeProductFromCart($event, cartItemPopover.value())
+                : decrementProductCount(cartItemPopover.value())
+            "
+          />
+          {{ cartItemPopover.value().count }}
+          <p-button
+            icon="pi pi-plus"
+            severity="danger"
+            [rounded]="true"
+            severity="secondary"
+            (onClick)="incrementProductCount(cartItemPopover.value())"
+          />
+        </div>
       </div>
     }
   </p-popover>
