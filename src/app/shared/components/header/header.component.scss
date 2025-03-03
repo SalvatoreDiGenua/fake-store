@@ -17,6 +17,7 @@
   .p-autocomplete,
   .p-autocomplete input {
     width: 100%;
+    min-width: 100px;
   }
 
   &__autocomplete {
@@ -35,6 +36,22 @@
 
     img {
       width: 40px;
+    }
+  }
+}
+
+@media (width <= 550px) {
+  .fake-store-header {
+    .p-toolbar {
+      gap: 0;
+      flex-wrap: nowrap;
+    }
+
+    &__back-button {
+      min-width: unset;
+      .p-button-label {
+        display: none;
+      }
     }
   }
 }
