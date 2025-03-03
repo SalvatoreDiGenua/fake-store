@@ -4,7 +4,7 @@
       <div class="fake-store-cart__header">
         <h2>
           Cart
-          {{ cartList().length > 0 ? `(${cartList().length} Articles)` : '' }}
+          {{ cartListCount() > 0 ? `(${cartListCount()} Articles)` : '' }}
         </h2>
         @if (cartTotalToSpend() > 0) {
           <h2>Total {{ cartTotalToSpend() | currency }}</h2>
@@ -20,21 +20,33 @@
     <p-dataview [value]="cartList()" emptyMessage="Cart is empty">
       <ng-template #list let-items>
         <div class="fake-store-cart__list">
-          @for (product of items; track product.id; let last = $last) {
+          @for (cartItem of items; track cartItem.id; let last = $last) {
             <div class="fake-store-cart__product">
               <app-product-image
-                [urlImageProduct]="product.image"
+                [urlImageProduct]="cartItem.image"
                 [sizeImageProduct]="100"
               ></app-product-image>
               <div class="fake-store-cart__product-info">
                 <div class="fake-store-cart__product-row1">
-                  <h3>{{ product.title }}</h3>
-                  <h3>{{ product.price | currency }}</h3>
+                  <h3>{{ cartItem.title }}</h3>
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    <h3>{{ cartItem.price | currency }}</h3>
+                    @if (cartItem.count > 1) {
+                      <p-button
+                        icon="pi pi-times"
+                        [badge]="cartItem.count"
+                        size="small"
+                        severity="secondary"
+                        [rounded]="true"
+                        variant="text"
+                      />
+                    }
+                  </div>
                 </div>
                 <div class="fake-store-cart__product-row2">
                   <p-button
                     icon="pi pi-trash"
-                    (click)="removeProductFromCart($event, product)"
+                    (click)="removeProductFromCart($event, cartItem)"
                     severity="danger"
                   />
                 </div>
