@@ -88,7 +88,7 @@
           (onClick)="
             cartItemPopover().count === 1
               ? removeProductFromCart($event, cartItemPopover())
-              : null
+              : decrementProductCount(cartItemPopover())
           "
         />
         {{ cartItemPopover().count }}
@@ -97,6 +97,7 @@
           severity="danger"
           [rounded]="true"
           severity="secondary"
+          (onClick)="incrementProductCount(cartItemPopover())"
         />
       </div>
     }

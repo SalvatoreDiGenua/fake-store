@@ -16,7 +16,11 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DataViewModule } from 'primeng/dataview';
 import { Product } from '../../models/product';
-import { removeProductFromCart } from '../../shared/stores/cart/cart.actions';
+import {
+  addProductToCart,
+  removeAllProductFromCart,
+  removeSingleProductFromCart,
+} from '../../shared/stores/cart/cart.actions';
 import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CurrencyPipe } from '@angular/common';
@@ -46,7 +50,7 @@ import { ItemCart } from '../../models/itemCart';
 })
 export class CartComponent {
   @HostBinding('class') class = 'host-fake-store-cart';
-  popoverCartItem = viewChild(Popover);
+  popoverRef = viewChild(Popover);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   cartList = toSignal(this.#store.select(getCartGrouped));
   cartListCount = toSignal(this.#store.select(getCartCount));
@@ -72,7 +76,7 @@ export class CartComponent {
         label: 'Save',
       },
       accept: () => {
-        this.#store.dispatch(removeProductFromCart({ product }));
+        this.#store.dispatch(removeAllProductFromCart({ product }));
         this.#messageService.add({
           severity: 'info',
           summary: 'Success',
@@ -84,6 +88,16 @@ export class CartComponent {
 
   showPopoverItemCartCount(event: Event, itemCart: ItemCart) {
     this.cartItemPopover.set(itemCart);
-    this.popoverCartItem().toggle(event);
+    this.popoverRef().toggle(event);
+  }
+
+  decrementProductCount(itemCart: ItemCart) {
+    const newItemCart = structuredClone(itemCart);
+    this.#store.dispatch(removeSingleProductFromCart({ product: newItemCart }));
+  }
+
+  incrementProductCount(itemCart: ItemCart) {
+    const newItemCart = structuredClone(itemCart);
+    this.#store.dispatch(addProductToCart({ product: newItemCart }));
   }
 }
