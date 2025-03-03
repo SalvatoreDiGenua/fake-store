@@ -52,7 +52,6 @@
     }
 
     &-row1 {
-      min-height: 44px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -71,5 +70,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  &__popover {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }

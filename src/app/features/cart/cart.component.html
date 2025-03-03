@@ -34,22 +34,21 @@
                   </div>
                   <div style="display: flex; align-items: center; gap: 5px">
                     <h3>{{ cartItem.price | currency }}</h3>
-                    @if (cartItem.count > 1) {
-                      <p-button
-                        icon="pi pi-times"
-                        [badge]="cartItem.count"
-                        size="small"
-                        severity="secondary"
-                        [rounded]="true"
-                        variant="text"
-                      />
-                    }
+                    <p-button
+                      icon="pi pi-times"
+                      [badge]="cartItem.count"
+                      size="small"
+                      severity="secondary"
+                      [rounded]="true"
+                      variant="text"
+                      (onClick)="showPopoverItemCartCount($event, cartItem)"
+                    />
                   </div>
                 </div>
                 <div class="fake-store-cart__product-row2">
                   <p-button
                     icon="pi pi-trash"
-                    (click)="removeProductFromCart($event, cartItem)"
+                    (onClick)="removeProductFromCart($event, cartItem)"
                     severity="danger"
                   />
                 </div>
@@ -73,4 +72,33 @@
       </ng-template>
     </p-dataview>
   </p-card>
+
+  <p-popover
+    #popoverCartItem
+    title="Product quantity"
+    (onHide)="cartItemPopover.set(null)"
+  >
+    @if (cartItemPopover()) {
+      <div class="fake-store-cart__popover">
+        <p-button
+          [icon]="cartItemPopover().count === 1 ? 'pi pi-trash' : 'pi pi-minus'"
+          severity="danger"
+          [rounded]="true"
+          [severity]="cartItemPopover().count === 1 ? 'danger' : 'secondary'"
+          (onClick)="
+            cartItemPopover().count === 1
+              ? removeProductFromCart($event, cartItemPopover())
+              : null
+          "
+        />
+        {{ cartItemPopover().count }}
+        <p-button
+          icon="pi pi-plus"
+          severity="danger"
+          [rounded]="true"
+          severity="secondary"
+        />
+      </div>
+    }
+  </p-popover>
 </div>

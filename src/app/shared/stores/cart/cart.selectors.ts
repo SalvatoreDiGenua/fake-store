@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { Product } from '../../../models/product';
 import { FakeStoreReducers } from '../app.reducers';
-import { ItemCard } from '../../../models/itemCard';
+import { ItemCart } from '../../../models/itemCart';
 
 export const getCart = (store: FakeStoreReducers): Product[] => store.cart;
 
@@ -15,7 +15,7 @@ export const getCartTotalToSpend = createSelector(getCart, (cartList) =>
 );
 
 export const getCartGrouped = createSelector(getCart, (cartList) => {
-  const itemsCart: ItemCard[] = [];
+  const itemsCart: ItemCart[] = [];
   const mapItemsCount = new Map<number, number>();
   cartList.forEach((el) => {
     const elCount = mapItemsCount.get(el.id) || 0;
