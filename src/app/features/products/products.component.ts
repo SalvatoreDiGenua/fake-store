@@ -1,12 +1,14 @@
 import {
   Component,
+  effect,
   HostBinding,
   inject,
   input,
+  viewChildren,
   ViewEncapsulation,
 } from '@angular/core';
 import { Skeleton } from 'primeng/skeleton';
-import { CardModule } from 'primeng/card';
+import { Card, CardModule } from 'primeng/card';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
@@ -14,8 +16,12 @@ import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getProductsByCategory } from '../../shared/stores/products/products.selectors';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { Product } from '../../models/product';
+import { KEY_IDPRODUCT_LOCALSTORAGE, Product } from '../../models/product';
 import { ProductsBreadcrumbComponent } from '../../shared/components/products-breadcrumb/products-breadcrumb.component';
+import {
+  isNullOrUndefined,
+  scrollIntoView,
+} from '../../shared/utility/functions';
 
 @Component({
   selector: 'app-products',
@@ -33,6 +39,7 @@ import { ProductsBreadcrumbComponent } from '../../shared/components/products-br
 export class ProductsComponent {
   @HostBinding('class') class = 'host-fake-store-products';
   productCategory = input('');
+  productsCardList = viewChildren<Card>(Card);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   productsList = rxResource<Product[], { productCategory: string }>({
     request: () => ({ productCategory: this.productCategory() }),
@@ -42,6 +49,31 @@ export class ProductsComponent {
   });
   productListPlaceholder = Array(10);
   #router = inject(Router);
+
+  scrollToProduct = effect(() => {
+    if (
+      this.productsList.isLoading() ||
+      !this.productsCardList() ||
+      this.productsCardList().length === 0
+    ) {
+      return;
+    }
+
+    const idProductToScroll = localStorage.getItem(KEY_IDPRODUCT_LOCALSTORAGE);
+    if (isNullOrUndefined(idProductToScroll)) {
+      return;
+    }
+    const cardProductToScroll = this.productsCardList().find(
+      (x) => x.el.nativeElement.id === `product-${idProductToScroll}`,
+    );
+    if (!cardProductToScroll) {
+      return;
+    }
+    setTimeout(() => {
+      scrollIntoView(cardProductToScroll.el.nativeElement, true);
+      localStorage.removeItem(KEY_IDPRODUCT_LOCALSTORAGE);
+    });
+  });
 
   goToProductDetails(idProduct: number) {
     this.#router.navigateByUrl(`products/${idProduct}/details`);

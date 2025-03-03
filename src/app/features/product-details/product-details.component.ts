@@ -1,11 +1,11 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { Button } from 'primeng/button';
-import { Product } from '../../models/product';
+import { KEY_IDPRODUCT_LOCALSTORAGE, Product } from '../../models/product';
 import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
@@ -33,6 +33,17 @@ export class ProductDetailsComponent {
   productDetails = this.#productsService.getSingleProduct(this.idProduct);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #messageService: MessageService = inject(MessageService);
+
+  setCurrentIdProductToScroll = effect(() => {
+    if (this.productDetails.isLoading()) {
+      return;
+    }
+
+    localStorage.setItem(
+      KEY_IDPRODUCT_LOCALSTORAGE,
+      this.productDetails.value().id.toString(),
+    );
+  });
 
   addProductToCart(productDetails: Product) {
     this.#store.dispatch(addProductToCart({ product: productDetails }));

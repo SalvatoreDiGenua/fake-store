@@ -9,6 +9,7 @@
       @for (product of productsList.value(); track product.id) {
         <p-card
           class="fake-store-card"
+          [id]="'product-' + product.id"
           (click)="goToProductDetails(product.id)"
         >
           <ng-template #header>

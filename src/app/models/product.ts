@@ -12,3 +12,5 @@ export interface ProductRating {
   rate: number;
   count: number;
 }
+
+export const KEY_IDPRODUCT_LOCALSTORAGE = 'KEY_IDPRODUCT_LOCALSTORAGE';
