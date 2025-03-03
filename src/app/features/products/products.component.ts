@@ -15,10 +15,17 @@ import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getProductsByCategory } from '../../shared/stores/products/products.selectors';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Product } from '../../models/product';
+import { ProductsBreadcrumbComponent } from '../../shared/components/products-breadcrumb/products-breadcrumb.component';
 
 @Component({
   selector: 'app-products',
-  imports: [CardModule, Skeleton, CurrencyPipe, ProductImageComponent],
+  imports: [
+    CardModule,
+    Skeleton,
+    CurrencyPipe,
+    ProductImageComponent,
+    ProductsBreadcrumbComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
   encapsulation: ViewEncapsulation.None,

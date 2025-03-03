@@ -9,8 +9,11 @@
   flex: 1 1 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   overflow: auto;
+
+  app-products-breadcrumb {
+    margin-bottom: 20px;
+  }
 
   &__placeholder {
     display: grid;

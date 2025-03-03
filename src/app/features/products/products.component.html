@@ -1,4 +1,5 @@
 <div class="fake-store-products">
+  <app-products-breadcrumb [productCategory]="productCategory()" />
   <div class="fake-store-products__list">
     @if (productsList.isLoading()) {
       @for (placeholder of productListPlaceholder; track $index) {
