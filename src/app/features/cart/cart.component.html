@@ -28,7 +28,10 @@
               ></app-product-image>
               <div class="fake-store-cart__product-info">
                 <div class="fake-store-cart__product-row1">
-                  <h3>{{ cartItem.title }}</h3>
+                  <div style="display: flex; flex-direction: column">
+                    <h3>{{ cartItem.title }}</h3>
+                    <small>{{ cartItem.category }}</small>
+                  </div>
                   <div style="display: flex; align-items: center; gap: 5px">
                     <h3>{{ cartItem.price | currency }}</h3>
                     @if (cartItem.count > 1) {
