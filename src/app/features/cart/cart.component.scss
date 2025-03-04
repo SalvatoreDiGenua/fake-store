@@ -10,9 +10,10 @@
   padding: 20px;
   display: flex;
 
-  p-card {
+  p-card,
+  .p-card {
     width: 100%;
-    margin-bottom: 20px;
+    height: 100%;
   }
 
   p-dataview {
