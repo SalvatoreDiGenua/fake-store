@@ -16,12 +16,16 @@ import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getProductsByCategory } from '../../shared/stores/products/products.selectors';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { KEY_IDPRODUCT_LOCALSTORAGE, Product } from '../../models/product';
+import { Product } from '../../models/product';
 import { ProductsBreadcrumbComponent } from '../../shared/components/products-breadcrumb/products-breadcrumb.component';
 import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../shared/utility/functions';
+import {
+  getIdProductFromLocalStorage,
+  removeIdProductFromLocalStorage,
+} from '../../shared/utility/fake-store-functions';
 
 @Component({
   selector: 'app-products',
@@ -59,7 +63,7 @@ export class ProductsComponent {
       return;
     }
 
-    const idProductToScroll = localStorage.getItem(KEY_IDPRODUCT_LOCALSTORAGE);
+    const idProductToScroll = getIdProductFromLocalStorage();
     if (isNullOrUndefined(idProductToScroll)) {
       return;
     }
@@ -71,7 +75,7 @@ export class ProductsComponent {
     }
     setTimeout(() => {
       scrollIntoView(cardProductToScroll.el.nativeElement, true);
-      localStorage.removeItem(KEY_IDPRODUCT_LOCALSTORAGE);
+      removeIdProductFromLocalStorage();
     });
   });
 
