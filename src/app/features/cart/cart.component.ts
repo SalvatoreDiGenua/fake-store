@@ -31,6 +31,7 @@ import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { ItemCart } from '../../models/itemCart';
+import { removeIdProductFromLocalStorage } from '../../shared/utility/fake-store-functions';
 
 @Component({
   selector: 'app-cart',
@@ -65,6 +66,10 @@ export class CartComponent {
       this.#store.select(getSingleItemCart(request.idCartItemPopover)),
     defaultValue: null,
   });
+
+  constructor() {
+    removeIdProductFromLocalStorage();
+  }
 
   removeProductFromCart(event: Event, product: Product) {
     this.popoverRef().hide();
