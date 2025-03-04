@@ -5,25 +5,37 @@
 }
 
 .fake-store-cart {
-  flex: 1 1 10px;
+  flex: 1 1 auto;
   overflow: auto;
   padding: 20px;
   display: flex;
 
   p-card,
-  .p-card {
-    width: 100%;
-    height: 100%;
-  }
+  .p-card,
+  .p-card-body,
+  .p-card-content,
+  .p-dataview-content,
+  p-dataview,
+  .p-dataview-list,
+  p-dataview-emptymessage {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 
-  p-dataview {
-    width: 100%;
-    height: 100%;
-    .p-dataview-emptymessage {
-      padding: 20px;
-      text-align: center;
+    div:has(.p-dataview-emptymessage) {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
     }
   }
+
+    .p-dataview-emptymessage {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      text-align: center;
+    }
 
   &__header {
     display: flex;
@@ -42,10 +54,14 @@
   }
 
   &__list {
-    width: 100%;
+    flex: 1 1 10px;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    &:empty {
+      flex: unset;
+    }
     &:not(:empty) {
       padding: 10px;
     }
