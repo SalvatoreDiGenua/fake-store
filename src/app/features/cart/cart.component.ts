@@ -32,6 +32,7 @@ import { RouterLink } from '@angular/router';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { ItemCart } from '../../models/itemCart';
 import { removeIdProductFromLocalStorage } from '../../shared/utility/fake-store-functions';
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-cart',
@@ -45,6 +46,7 @@ import { removeIdProductFromLocalStorage } from '../../shared/utility/fake-store
     RouterLink,
     PopoverModule,
     Popover,
+    HeaderComponent
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',

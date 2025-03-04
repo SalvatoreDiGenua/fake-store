@@ -11,21 +11,21 @@ import { Skeleton } from 'primeng/skeleton';
 import { Card, CardModule } from 'primeng/card';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
 import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import { getProductsByCategory } from '../../shared/stores/products/products.selectors';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { Product } from '../../models/product';
-import { ProductsBreadcrumbComponent } from '../../shared/components/products-breadcrumb/products-breadcrumb.component';
-import {
-  isNullOrUndefined,
-  scrollIntoView,
-} from '../../shared/utility/functions';
+import { Product } from '../../../../models/product';
+import { ProductImageComponent } from '../../../../shared/components/product-image/product-image.component';
+import { ProductsBreadcrumbComponent } from '../../../../shared/components/products-breadcrumb/products-breadcrumb.component';
+import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
+import { getProductsByCategory } from '../../../../shared/stores/products/products.selectors';
 import {
   getIdProductFromLocalStorage,
   removeIdProductFromLocalStorage,
-} from '../../shared/utility/fake-store-functions';
+} from '../../../../shared/utility/fake-store-functions';
+import {
+  isNullOrUndefined,
+  scrollIntoView,
+} from '../../../../shared/utility/functions';
 
 @Component({
   selector: 'app-products',
@@ -80,6 +80,6 @@ export class ProductsComponent {
   });
 
   goToProductDetails(idProduct: number) {
-    this.#router.navigateByUrl(`products/${idProduct}/details`);
+    this.#router.navigateByUrl(`shop/products/${idProduct}/details`);
   }
 }

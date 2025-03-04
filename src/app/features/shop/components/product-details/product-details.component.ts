@@ -1,18 +1,18 @@
 import { Component, effect, inject, input } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
-import { ProductImageComponent } from '../../shared/components/product-image/product-image.component';
+import { ProductsService } from '../../../../services/products.service';
+import { ProductImageComponent } from '../../../../shared/components/product-image/product-image.component';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { Button } from 'primeng/button';
-import { Product } from '../../models/product';
+import { Product } from '../../../../models/product';
 import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import { addProductToCart } from '../../shared/stores/cart/cart.actions';
+import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
+import { addProductToCart } from '../../../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
 import { FieldsetModule } from 'primeng/fieldset';
-import { setIdProductIntoLocalStorage } from '../../shared/utility/fake-store-functions';
+import { setIdProductIntoLocalStorage } from '../../../../shared/utility/fake-store-functions';
 
 @Component({
   selector: 'app-product-details',

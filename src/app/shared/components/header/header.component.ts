@@ -58,11 +58,11 @@ export class HeaderComponent implements OnInit {
   }
 
   backToProductList() {
-    this.#router.navigate(['products']);
+    this.#router.navigateByUrl('shop/products');
   }
 
   goIntoProductDetails = (product: Product) => {
-    this.#router.navigate(['products', product.id, 'details']);
+    this.#router.navigateByUrl(`shop/products/${product.id}/details`);
   };
 
   async completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
