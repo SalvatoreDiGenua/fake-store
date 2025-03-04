@@ -22,7 +22,7 @@ export class ProductsBreadcrumbComponent {
   });
   homeBreadcrumb: MenuItem = {
     label: 'All categories',
-    icon: PrimeIcons.HOME,
+    icon: PrimeIcons.SHOPPING_BAG,
     routerLink: '/products',
   };
 }
