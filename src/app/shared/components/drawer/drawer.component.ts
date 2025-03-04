@@ -32,7 +32,8 @@ export class DrawerComponent {
     _treeNodes.push({
       label: 'Product categories',
       icon: PrimeIcons.SHOPPING_BAG,
-      type: 'default',
+      type: 'url',
+      data: { url: '/products' },
       children: this.productCategories().map((el) => ({
         label: el,
         type: 'url',
@@ -61,7 +62,9 @@ export class DrawerComponent {
     this.visible.set(false);
     this.#router.navigate([node.data.url], {
       relativeTo: this.#activatedRoute,
-      queryParams: { productCategory: node.data.queryParams },
+      ...(node.data.queryParams && {
+        queryParams: { productCategory: node.data.queryParams },
+      }),
     });
   }
 }

@@ -11,7 +11,7 @@
     </div>
   </ng-template>
 
-  <p-tree [value]="treeNodes()" styleClass="w-full md:w-[30rem]">
+  <p-tree [value]="treeNodes()">
     <ng-template let-node pTemplate="default">
       {{ node.label }}
     </ng-template>
