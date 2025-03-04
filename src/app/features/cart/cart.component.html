@@ -4,12 +4,22 @@
   <p-card>
     <ng-template #title>
       <div class="fake-store-cart__header">
-        <h2>
-          Cart
-          {{ cartListCount() > 0 ? `(${cartListCount()} Articles)` : '' }}
-        </h2>
+        <div class="fake-store-cart__header-row" alignItems="flex-start">
+          <h2>Cart</h2>
+          <small>
+            {{ cartListCount() > 0 ? `(${cartListCount()} Articles)` : '' }}
+          </small>
+        </div>
         @if (cartTotalToSpend() > 0) {
-          <h2>Total {{ cartTotalToSpend() | currency }}</h2>
+          <div class="fake-store-cart__header-row" alignItems="flex-end">
+            <h2>Total {{ cartTotalToSpend() | currency }}</h2>
+            <p-button
+              label="Go to checkout"
+              icon="pi pi-money-bill"
+              iconPos="right"
+              routerLink="/checkout"
+            />
+          </div>
         } @else {
           <p-button
             [link]="true"
