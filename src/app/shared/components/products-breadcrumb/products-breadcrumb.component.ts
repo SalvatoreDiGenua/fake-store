@@ -15,7 +15,6 @@ export class ProductsBreadcrumbComponent {
     if (this.productCategory()) {
       _itemsBreadcrumb.push({
         label: this.productCategory(),
-        routerLink: `/products?productCategory=${this.productCategory()}`,
       });
     }
     return _itemsBreadcrumb;
