@@ -16,12 +16,14 @@
       {{ node.label }}
     </ng-template>
     <ng-template let-node pTemplate="url">
-      <p-button
-        [label]="node.label"
-        variant="text"
-        severity="contrast"
-        (onClick)="nodeUrlClick(node)"
-      />
+      <a
+        class="p-button p-component p-button-link"
+        [routerLink]="node.data.url"
+        [queryParams]="node.data?.queryParams"
+        (click)="toggleVisible(false)"
+      >
+        {{ node.label }}
+      </a>
     </ng-template>
   </p-tree>
 </p-drawer>

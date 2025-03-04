@@ -13,12 +13,11 @@ import { getProductCategories } from '../../stores/products/products.selectors';
 import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
-import { Button } from 'primeng/button';
-import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, Button],
+  imports: [DrawerModule, TreeModule, RouterLink],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -28,7 +27,10 @@ export class DrawerComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   productCategories = toSignal(this.#store.pipe(select(getProductCategories)));
   treeNodes: Signal<TreeNode[]> = computed(() => {
-    const _treeNodes: TreeNode<{ url: string; queryParams?: string }>[] = [];
+    const _treeNodes: TreeNode<{
+      url: string;
+      queryParams?: Record<string, string>;
+    }>[] = [];
     _treeNodes.push({
       label: 'Product categories',
       icon: PrimeIcons.SHOPPING_BAG,
@@ -37,7 +39,7 @@ export class DrawerComponent {
       children: this.productCategories().map((el) => ({
         label: el,
         type: 'url',
-        data: { url: '/products', queryParams: el },
+        data: { url: '/products', queryParams: { productCategory: el } },
         icon: PrimeIcons.ASTERISK,
       })),
     });
@@ -49,22 +51,8 @@ export class DrawerComponent {
     });
     return _treeNodes;
   });
-  #router = inject(Router);
-  #activatedRoute = inject(ActivatedRoute);
 
   toggleVisible(value: boolean) {
     this.visible.set(value);
-  }
-
-  protected nodeUrlClick(
-    node: TreeNode<{ url: string; queryParams?: string }>,
-  ) {
-    this.visible.set(false);
-    this.#router.navigate([node.data.url], {
-      relativeTo: this.#activatedRoute,
-      ...(node.data.queryParams && {
-        queryParams: { productCategory: node.data.queryParams },
-      }),
-    });
   }
 }
