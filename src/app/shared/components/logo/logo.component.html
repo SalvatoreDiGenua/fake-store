@@ -1,0 +1,11 @@
+<div class="fake-store-logo">
+  <img
+    class="fake-store-logo___img"
+    src="fake-store-icon.svg"
+    alt="fake-store-logo"
+    [style.width.px]="widthLogo()"
+  />
+  @if (withText()) {
+    <h2 class="fake-store-logo__title">Fake store</h2>
+  }
+</div>

@@ -5,10 +5,7 @@
   (visibleChange)="toggleVisible($event)"
 >
   <ng-template #header>
-    <div class="fake-store-header__logo">
-      <img src="fake-store-icon.svg" alt="fake-store-logo" />
-      <h2>Fake store</h2>
-    </div>
+    <app-logo />
   </ng-template>
 
   <p-tree [value]="treeNodes()">

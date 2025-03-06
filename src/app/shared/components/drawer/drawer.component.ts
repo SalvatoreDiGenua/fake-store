@@ -14,10 +14,11 @@ import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
 import { RouterLink } from '@angular/router';
+import { LogoComponent } from '../logo/logo.component';
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, RouterLink],
+  imports: [DrawerModule, TreeModule, RouterLink, LogoComponent],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,

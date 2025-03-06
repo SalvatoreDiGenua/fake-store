@@ -28,16 +28,6 @@
       gap: 15px;
     }
   }
-
-  &__logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    img {
-      width: 40px;
-    }
-  }
 }
 
 @media (width <= 550px) {

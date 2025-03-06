@@ -1,0 +1,13 @@
+.fake-store-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (width <= 550px) {
+  .fake-store-logo {
+    &__title {
+      display: none;
+    }
+  }
+}
