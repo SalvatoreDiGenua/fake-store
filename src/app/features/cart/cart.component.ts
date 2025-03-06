@@ -46,7 +46,7 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     RouterLink,
     PopoverModule,
     Popover,
-    HeaderComponent
+    HeaderComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',

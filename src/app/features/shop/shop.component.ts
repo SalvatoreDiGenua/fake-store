@@ -9,5 +9,4 @@ import { ButtonCartComponent } from '../../shared/components/button-cart/button-
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
-export class ShopComponent {
-}
+export class ShopComponent {}
