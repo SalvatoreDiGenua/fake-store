@@ -1,9 +1,24 @@
 <div class="fake-store-checkout">
-  <p-button
-    label="Back to cart"
-    icon="pi pi-arrow-left"
-    routerLink="/cart"
-  ></p-button>
+  <p-toolbar>
+    <ng-template #start>
+      <app-logo [withText]="false" />
+    </ng-template>
+    <ng-template #end>
+      <div style="display: flex; gap: 10px">
+        <p-button
+          label="Back to cart"
+          icon="pi pi-arrow-left"
+          routerLink="/cart"
+        ></p-button>
+        <p-button
+          label="Complete order"
+          icon="pi pi-gift"
+          iconPos="right"
+          (onClick)="confirmOrder()"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-toolbar>
   <p-card header="Checkout order">
     <ng-template #content>
       <div class="fake-store-checkout__forms">
