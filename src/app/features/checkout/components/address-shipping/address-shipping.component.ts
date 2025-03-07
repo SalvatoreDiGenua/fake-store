@@ -1,5 +1,10 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { KeysAddressShipping } from '../../../../models/addressShipping';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,7 +17,6 @@ import { InputTextModule } from 'primeng/inputtext';
   encapsulation: ViewEncapsulation.None,
 })
 export class AddressShippingComponent {
-  #formBuilder = inject(FormBuilder);
   keysFormAddressShipping: KeysAddressShipping[] = [
     'name',
     'surname',
@@ -24,20 +28,19 @@ export class AddressShippingComponent {
     'address',
     'streetNumber',
   ];
-  formAddressShipping = this.#formBuilder.group({
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    email: [
-      '',
+  formAddressShipping = new FormGroup({
+    name: new FormControl('', Validators.required),
+    surname: new FormControl('', Validators.required),
+    email: new FormControl('', [
       Validators.required,
       Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-    ],
-    cellphone: ['', Validators.required],
-    telephone: [''],
-    state: ['', Validators.required],
-    city: ['', Validators.required],
-    address: ['', Validators.required],
-    streetNumber: [null, Validators.required],
+    ]),
+    cellphone: new FormControl('', Validators.required),
+    telephone: new FormControl(''),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    streetNumber: new FormControl(null, Validators.required),
   });
   labelAddressShipping: Record<KeysAddressShipping, string> = {
     name: 'Name',

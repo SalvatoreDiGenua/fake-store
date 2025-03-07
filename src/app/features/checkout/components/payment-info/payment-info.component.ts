@@ -1,5 +1,10 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { KeysPaymentInfo } from '../../../../models/paymentInfo';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,18 +17,17 @@ import { InputTextModule } from 'primeng/inputtext';
   encapsulation: ViewEncapsulation.None,
 })
 export class PaymentInfoComponent {
-  #formBuilder = inject(FormBuilder);
   keysFormPaymentInfo: KeysPaymentInfo[] = [
     'cartNumber',
     'cartExpired',
     'cvvCart',
     'holder',
   ];
-  formPaymentInfo = this.#formBuilder.group({
-    cartNumber: ['', Validators.required],
-    cartExpired: ['', Validators.required],
-    cvvCart: ['', Validators.required],
-    holder: [null, Validators.required],
+  formPaymentInfo = new FormGroup({
+    cartNumber: new FormControl('', Validators.required),
+    cartExpired: new FormControl('', Validators.required),
+    cvvCart: new FormControl('', Validators.required),
+    holder: new FormControl(null, Validators.required),
   });
   labelPaymentInfo: Record<KeysPaymentInfo, string> = {
     cartNumber: 'Cart number',
