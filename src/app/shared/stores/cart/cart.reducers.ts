@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { Product } from '../../../models/product';
 import {
   addProductToCart,
-  emptyCart,
+  resetCart,
   removeAllProductFromCart,
   removeSingleProductFromCart,
 } from './cart.actions';
@@ -30,5 +30,5 @@ export const cartReducers = createReducer<Product[]>(
     newCartState.splice(indexProductToRemove, 1);
     return newCartState;
   }),
-  on(emptyCart, () => [] as ItemCart[]),
+  on(resetCart, () => [] as ItemCart[]),
 );

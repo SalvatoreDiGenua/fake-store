@@ -16,7 +16,4 @@ export const removeAllProductFromCart = createAction(
   props<{ product: Product }>(),
 );
 
-export const emptyCart = createAction(
-  '[Cart] Empty Cart',
-  props<{ product: Product }>(),
-);
+export const resetCart = createAction('[Cart] Empty Cart');
