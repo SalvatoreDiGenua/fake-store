@@ -1,0 +1,15 @@
+.fake-store-checkout-address-shipping {
+  display: grid;
+  grid-template-areas: "name surname" "email email" "cellphone telephone" "state city" "address streetNumber";
+  gap: 15px;
+  input {
+    width: 100%;
+  }
+}
+
+@media (width <= 550px) {
+  .fake-store-checkout-address-shipping {
+    display: flex;
+    flex-direction: column;
+  }
+}
