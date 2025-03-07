@@ -1,6 +1,5 @@
 {
   "editor.tabSize": 2,
   "editor.stickyScroll.scrollWithEditor": true,
-  "editor.hover.sticky": false,
   "editor.stickyScroll.enabled": false
 }
