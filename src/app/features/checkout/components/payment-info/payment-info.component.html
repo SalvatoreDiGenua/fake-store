@@ -1,0 +1,8 @@
+<div class="fake-store-checkout-payment-info" [formGroup]="formPaymentInfo">
+  @for (key of keysFormPaymentInfo; track key) {
+    <p-iftalabel [style.gridArea]="key">
+      <input type="text" pInputText [formControlName]="key" />
+      <label [for]="key">{{ labelPaymentInfo[key] }}</label>
+    </p-iftalabel>
+  }
+</div>

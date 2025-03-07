@@ -1,0 +1,15 @@
+.fake-store-checkout-payment-info {
+  display: grid;
+  grid-template-areas: "cartNumber cartNumber cartExpired" "cvvCart cvvCart empty" "holder holder holder";
+  gap: 15px;
+  input {
+    width: 100%;
+  }
+}
+
+@media (width <= 550px) {
+  .fake-store-checkout-payment-info {
+    display: flex;
+    flex-direction: column;
+  }
+}
