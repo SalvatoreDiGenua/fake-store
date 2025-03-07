@@ -33,7 +33,7 @@ export class AddressShippingComponent {
       Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
     ],
     cellphone: ['', Validators.required],
-    telephone: ['', Validators.required],
+    telephone: [''],
     state: ['', Validators.required],
     city: ['', Validators.required],
     address: ['', Validators.required],
