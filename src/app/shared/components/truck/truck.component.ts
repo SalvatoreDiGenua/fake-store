@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-truck',
   imports: [],
   templateUrl: './truck.component.html',
-  styleUrl: './truck.component.scss'
+  styleUrl: './truck.component.scss',
 })
-export class TruckComponent {
-
-}
+export class TruckComponent {}
