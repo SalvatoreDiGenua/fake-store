@@ -11,10 +11,11 @@ import { Card } from 'primeng/card';
 import { Toolbar } from 'primeng/toolbar';
 import { map, timer } from 'rxjs';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
+import { TruckComponent } from '../../shared/components/truck/truck.component';
 
 @Component({
   selector: 'app-order-confirmed',
-  imports: [Card, RouterLink, Button, Toolbar, LogoComponent],
+  imports: [Card, RouterLink, Button, Toolbar, LogoComponent, TruckComponent],
   templateUrl: './order-confirmed.component.html',
   styleUrl: './order-confirmed.component.scss',
   encapsulation: ViewEncapsulation.None,

@@ -8,16 +8,15 @@
     <ng-template #content>
       <div class="fake-store-order-confirmed__content">
         @if (isOrderMaking()) {
-          order is making...
+          <h1 style="padding-bottom: 40px;">We are making you order...</h1>
+          <app-truck />
         } @else {
-          <div class="fake-store-order-confirmed__content-success">
-            <i class="pi pi-gift"></i>
-            <h1>Congratulations for your order</h1>
-            <h3>
-              Should you need anything else buy it
-              <p-button label="here!" [link]="true" routerLink="shop" />
-            </h3>
-          </div>
+          <i class="pi pi-gift"></i>
+          <h1>Congratulations for your order</h1>
+          <h3>
+            Should you need anything else buy it
+            <p-button label="here!" [link]="true" routerLink="shop" />
+          </h3>
         }
       </div>
     </ng-template>

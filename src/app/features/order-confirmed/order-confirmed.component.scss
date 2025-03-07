@@ -28,20 +28,16 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    &-success {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      .p-button-link {
-        padding: 0 !important;
-      }
-      i {
-        font-size: 12vw;
-        margin-bottom: 20px;
-      }
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    .p-button-link {
+      padding: 0 !important;
+    }
+    i {
+      font-size: 12vw;
+      margin-bottom: 20px;
     }
   }
 }
