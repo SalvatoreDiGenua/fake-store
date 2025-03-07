@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { orderConfirmedGuard } from './guards/order-confirmed.guard';
+import { hasCartProducts } from './guards/has-cart-products.guard';
 
 export const routes: Routes = [
   {
@@ -34,6 +34,7 @@ export const routes: Routes = [
       import('./features/checkout/checkout.component').then(
         (m) => m.CheckoutComponent,
       ),
+    canActivate: [hasCartProducts],
   },
   {
     path: 'order-confirmed',
@@ -41,7 +42,7 @@ export const routes: Routes = [
       import('./features/order-confirmed/order-confirmed.component').then(
         (m) => m.OrderConfirmedComponent,
       ),
-    canActivate: [orderConfirmedGuard],
+    canActivate: [hasCartProducts],
   },
   {
     path: '**',
