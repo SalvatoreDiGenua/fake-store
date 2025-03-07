@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { orderConfirmedGuard } from './guards/order-confirmed.guard';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,7 @@ export const routes: Routes = [
       import('./features/order-confirmed/order-confirmed.component').then(
         (m) => m.OrderConfirmedComponent,
       ),
+    canActivate: [orderConfirmedGuard],
   },
   {
     path: '**',
