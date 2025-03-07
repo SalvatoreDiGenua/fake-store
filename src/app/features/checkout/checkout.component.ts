@@ -13,6 +13,7 @@ import { Toolbar } from 'primeng/toolbar';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AddressShippingComponent } from './components/address-shipping/address-shipping.component';
 import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-checkout',
@@ -35,6 +36,7 @@ export class CheckoutComponent {
   addressShippingRef = viewChild(AddressShippingComponent);
   paymentInfoComponentgRef = viewChild(PaymentInfoComponent);
   #router = inject(Router);
+  #messageService: MessageService = inject(MessageService);
 
   confirmOrder() {
     Object.values({
@@ -46,6 +48,11 @@ export class CheckoutComponent {
       this.addressShippingRef().formAddressShipping.invalid ||
       this.paymentInfoComponentgRef().formPaymentInfo.invalid
     ) {
+      this.#messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: `Complete all required fields`,
+      });
       return;
     }
 
