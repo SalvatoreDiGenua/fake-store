@@ -1,0 +1,25 @@
+<div class="fake-store-order-confirmed">
+  <p-toolbar>
+    <ng-template #start>
+      <app-logo />
+    </ng-template>
+  </p-toolbar>
+  <p-card>
+    <ng-template #content>
+      <div class="fake-store-order-confirmed__content">
+        @if (isOrderMaking()) {
+          order is making...
+        } @else {
+          <div class="fake-store-order-confirmed__content-success">
+            <i class="pi pi-gift"></i>
+            <h1>Congratulations for your order</h1>
+            <h3>
+              Should you need anything else buy it
+              <p-button label="here!" [link]="true" routerLink="shop" />
+            </h3>
+          </div>
+        }
+      </div>
+    </ng-template>
+  </p-card>
+</div>

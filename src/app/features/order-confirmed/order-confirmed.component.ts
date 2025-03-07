@@ -1,0 +1,26 @@
+import {
+  Component,
+  computed,
+  HostBinding,
+  ViewEncapsulation,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
+import { Button } from 'primeng/button';
+import { Card } from 'primeng/card';
+import { Toolbar } from 'primeng/toolbar';
+import { map, timer } from 'rxjs';
+import { LogoComponent } from '../../shared/components/logo/logo.component';
+
+@Component({
+  selector: 'app-order-confirmed',
+  imports: [Card, RouterLink, Button, Toolbar, LogoComponent],
+  templateUrl: './order-confirmed.component.html',
+  styleUrl: './order-confirmed.component.scss',
+  encapsulation: ViewEncapsulation.None,
+})
+export class OrderConfirmedComponent {
+  @HostBinding('class') class = 'host-fake-store-order-confirmed';
+  timerFinished = toSignal(timer(5000).pipe(map(() => true)));
+  isOrderMaking = computed(() => (this.timerFinished() ? false : true));
+}

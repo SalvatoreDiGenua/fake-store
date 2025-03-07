@@ -35,6 +35,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'order-confirmed',
+    loadComponent: () =>
+      import('./features/order-confirmed/order-confirmed.component').then(
+        (m) => m.OrderConfirmedComponent,
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'shop/products',
   },
