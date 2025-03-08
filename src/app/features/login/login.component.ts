@@ -36,10 +36,7 @@ import { MessageService } from 'primeng/api';
 export class LoginComponent {
   @HostBinding('class') class = 'host-fake-store-login';
   formLogin = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-    ]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
   #messageService: MessageService = inject(MessageService);
@@ -54,7 +51,7 @@ export class LoginComponent {
       this.#messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Email and Password fields are required',
+        detail: 'Username and Password fields are required',
       });
       return;
     }
