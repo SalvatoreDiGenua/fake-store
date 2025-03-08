@@ -2,6 +2,7 @@ import {
   Component,
   HostBinding,
   inject,
+  OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
 import { Card } from 'primeng/card';
@@ -17,6 +18,8 @@ import {
 import { PasswordModule } from 'primeng/password';
 import { Button } from 'primeng/button';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -33,13 +36,15 @@ import { MessageService } from 'primeng/api';
   styleUrl: './login.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   @HostBinding('class') class = 'host-fake-store-login';
   formLogin = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
   #messageService: MessageService = inject(MessageService);
+  #authService: AuthService = inject(AuthService);
+  #loginSubscription: Subscription = new Subscription();
 
   validateFormLogin() {
     Object.values(this.formLogin.controls).forEach((el) => el.markAsDirty());
@@ -55,5 +60,13 @@ export class LoginComponent {
       });
       return;
     }
+    const { username, password } = this.formLogin.getRawValue();
+    this.#loginSubscription = this.#authService
+      .login(username, password)
+      .subscribe((res) => console.log(res));
+  }
+
+  ngOnDestroy() {
+    this.#loginSubscription.unsubscribe();
   }
 }
