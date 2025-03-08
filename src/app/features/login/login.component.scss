@@ -1,0 +1,63 @@
+.host-fake-store-login {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.fake-store-login {
+  padding: 20px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  .p-card-content {
+    align-items: center;
+    justify-content: center;
+    background: url("/fake-store-background-login.svg") no-repeat center;
+  }
+
+  &__content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    border: 1px solid var(--fake-store-gray-500);
+    border-radius: var(--fake-store-card-border-radius);
+  }
+
+  &__avatar {
+    --size-avatar: 200px;
+
+    p-avatar,
+    .p-avatar-icon {
+      font-size: calc(
+        var(--size-avatar) - calc(var(--size-avatar) / 4 + 10px)
+      ) !important;
+      width: var(--size-avatar) !important;
+      height: var(--size-avatar) !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    input,
+    button {
+      width: 100%;
+    }
+    &-password-recovery {
+      display: flex;
+      justify-content: flex-end;
+      .p-button-text {
+        padding: 0;
+      }
+    }
+  }
+}

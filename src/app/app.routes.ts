@@ -3,6 +3,11 @@ import { hasCartProducts } from './guards/has-cart-products.guard';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    loadComponent: () =>
+      import('./features/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
     path: 'shop',
     loadComponent: () =>
       import('./features/shop/shop.component').then((m) => m.ShopComponent),

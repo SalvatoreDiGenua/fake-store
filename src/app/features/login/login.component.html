@@ -1,0 +1,37 @@
+<div class="fake-store-login">
+  <p-card>
+    <ng-template #content>
+      <div class="fake-store-login__content">
+        <div class="fake-store-login__avatar">
+          <p-avatar icon="pi pi-user" size="xlarge" shape="circle" />
+        </div>
+        <div class="fake-store-login__form" [formGroup]="formLogin">
+          <p-iftalabel>
+            <input
+              pInputText
+              type="email"
+              id="email"
+              pSize="large"
+              formControlName="email"
+            />
+            <label for="email">Email</label>
+          </p-iftalabel>
+          <p-iftalabel>
+            <p-password
+              id="password"
+              size="large"
+              formControlName="password"
+              [toggleMask]="true"
+              [feedback]="false"
+            />
+            <label for="password">Password</label>
+          </p-iftalabel>
+          <div class="fake-store-login__form-password-recovery">
+            <p-button label="password forget?" variant="text" severity="secondary"/>
+          </div>
+          <p-button label="Login" severity="info" (onClick)="login()" />
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
