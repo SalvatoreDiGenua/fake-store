@@ -21,7 +21,6 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { jwtDecode } from 'jwt-decode';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getUserRemote } from '../../shared/stores/user/user.actions';
 
