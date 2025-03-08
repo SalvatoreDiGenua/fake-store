@@ -20,6 +20,10 @@ import { Button } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { jwtDecode } from 'jwt-decode';
+import { FakeStoreReducers } from '../../shared/stores/app.reducers';
+import { getUserRemote } from '../../shared/stores/user/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +42,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnDestroy {
   @HostBinding('class') class = 'host-fake-store-login';
+  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   formLogin = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -63,7 +68,9 @@ export class LoginComponent implements OnDestroy {
     const { username, password } = this.formLogin.getRawValue();
     this.#loginSubscription = this.#authService
       .login(username, password)
-      .subscribe((res) => console.log(res));
+      .subscribe((res) =>
+        this.#store.dispatch(getUserRemote({ token: res.token })),
+      );
   }
 
   ngOnDestroy() {

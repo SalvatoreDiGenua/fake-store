@@ -20,6 +20,7 @@ import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './shared/stores/products/products.effects';
 import { httpRequestInterceptor } from './interceptors/http-request.interceptor';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { UserEffects } from './shared/stores/user/user.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -45,6 +46,6 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       name: 'FakeStore',
     }),
-    provideEffects(ProductsEffects),
+    provideEffects(ProductsEffects, UserEffects),
   ],
 };
