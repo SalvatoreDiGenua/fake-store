@@ -7,24 +7,34 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status === 0) {
-        messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'No internet connection',
-        });
-      } else {
-        switch (error.status) {
-          case 401:
-            messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Unauthorized. Please login again',
-            });
-            break;
-        }
-      }
+      httpErrorInterceptor(error, messageService);
       return throwError(() => error);
     }),
   );
+};
+
+const httpErrorInterceptor = (
+  error: HttpErrorResponse,
+  messageService: MessageService,
+) => {
+  if (error.status === 0) {
+    messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'No internet connection',
+    });
+  } else {
+    switch (error.status) {
+      case 401:
+      case 403:
+      case 404:
+      case 500:
+        messageService.add({
+          severity: 'error',
+          summary: error.statusText,
+          detail: error.error,
+        });
+        break;
+    }
+  }
 };

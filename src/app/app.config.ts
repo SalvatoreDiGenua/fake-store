@@ -19,9 +19,12 @@ import { fakeStoreReducers } from './shared/stores/app.reducers';
 import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './shared/stores/products/products.effects';
 import { httpRequestInterceptor } from './interceptors/http-request.interceptor';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
+    ConfirmationService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
     provideHttpClient(withInterceptors([httpRequestInterceptor])),
