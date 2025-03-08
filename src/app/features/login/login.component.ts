@@ -1,4 +1,9 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Card } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,6 +16,7 @@ import {
 } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { Button } from 'primeng/button';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +42,7 @@ export class LoginComponent {
     ]),
     password: new FormControl('', [Validators.required]),
   });
+  #messageService: MessageService = inject(MessageService);
 
   validateFormLogin() {
     Object.values(this.formLogin.controls).forEach((el) => el.markAsDirty());
@@ -43,5 +50,13 @@ export class LoginComponent {
 
   login() {
     this.validateFormLogin();
+    if (this.formLogin.invalid) {
+      this.#messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Email and Password fields are required',
+      });
+      return;
+    }
   }
 }
