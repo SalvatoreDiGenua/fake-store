@@ -17,7 +17,7 @@ export class AuthService {
       throw new Error('To login email is required');
     }
 
-    return this.#httpClient.post(
+    return this.#httpClient.post<{ token: string }>(
       this.#AUTH_URL,
       {
         username,
