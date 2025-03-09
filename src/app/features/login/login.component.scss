@@ -5,11 +5,6 @@
 }
 
 .fake-store-login {
-  padding: 20px;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-
   .p-card-content {
     align-items: center;
     justify-content: center;
@@ -69,6 +64,15 @@
     p-button,
     button {
       width: 100%;
+    }
+  }
+}
+
+@media (width <= 550px) {
+  .fake-store-login {
+    &__content {
+      padding: 0;
+      box-shadow: none;
     }
   }
 }

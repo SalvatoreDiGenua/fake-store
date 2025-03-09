@@ -5,10 +5,7 @@
 }
 
 .fake-store-products {
-  padding: 20px;
   flex: 1 1 10px;
-  display: flex;
-  flex-direction: column;
   overflow: auto;
 
   app-products-breadcrumb {

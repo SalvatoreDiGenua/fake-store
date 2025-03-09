@@ -32,6 +32,8 @@
 
 @media (width <= 550px) {
   .fake-store-header {
+    padding: 10px 0;
+
     .p-toolbar {
       gap: 0;
       flex-wrap: nowrap;

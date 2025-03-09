@@ -1,5 +1,18 @@
+.fake-store-main-component-container {
+  padding: 20px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media (width <= 550px) {
+  .fake-store-main-component-container {
+    padding: 0;
+  }
 }

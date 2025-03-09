@@ -5,11 +5,8 @@
 }
 
 .fake-store-product-details {
-  padding: 20px;
   flex: 1 1 10px;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
   gap: 40px;
 
   &__top {
@@ -38,3 +35,11 @@
     flex-direction: column;
   }
 }
+
+
+@media (width <= 550px) {
+  .fake-store-product-details {
+    padding: 10px;
+  }
+}
+
