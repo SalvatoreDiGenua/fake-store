@@ -12,6 +12,13 @@ import { ButtonCartComponent } from '../../shared/components/button-cart/button-
 export class ShopComponent {
   #router = inject(Router);
   constructor() {
-    this.#router.navigateByUrl('shop/products');
+    this.goToProducts();
+  }
+
+  goToProducts() {
+    const url = this.#router.url;
+    if (url === '/shop') {
+      this.#router.navigateByUrl('shop/products');
+    }
   }
 }
