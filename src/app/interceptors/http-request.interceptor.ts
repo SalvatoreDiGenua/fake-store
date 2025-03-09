@@ -11,8 +11,11 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
   const loaderService = inject(LoaderService);
   const token = getTokenFromCookie(cookieService);
+  const withLoader = req.params.get('withLoader') === 'true';
 
-  loaderService.isLoading.set(true);
+  if (withLoader) {
+    loaderService.isLoading.set(true);
+  }
 
   if (token) {
     req = req.clone({

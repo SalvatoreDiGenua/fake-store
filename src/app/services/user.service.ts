@@ -11,17 +11,18 @@ export class UserService {
   #USER_URL = `${environment.BASE_URL}/users`;
   #httpClient: HttpClient = inject(HttpClient);
 
-  getUser(idUser: number | string) {
+  getUser(idUser: number | string, withLoader = true) {
     if (!idUser) {
       throw new Error('idUser is required');
     }
 
     return this.#httpClient.get<User>(`${this.#USER_URL}/${idUser}`, {
       withCredentials: true,
+      params: { withLoader },
     });
   }
 
-  getUserByToken(token: string) {
+  getUserByToken(token: string, withLoader = true) {
     if (!token) {
       throw new Error('token is required');
     }
@@ -29,6 +30,6 @@ export class UserService {
     if (!tokenDecoded) {
       return null;
     }
-    return this.getUser(tokenDecoded.sub);
+    return this.getUser(tokenDecoded.sub, withLoader);
   }
 }

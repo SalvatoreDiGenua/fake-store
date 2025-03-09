@@ -18,7 +18,7 @@ export class AuthService {
   #cookieService: CookieService = inject(CookieService);
   #router: Router = inject(Router);
 
-  login(username: string, password: string) {
+  login(username: string, password: string, withLoader = true) {
     if (!username) {
       throw new Error('To login username is required');
     }
@@ -32,7 +32,10 @@ export class AuthService {
         username,
         password,
       },
-      { withCredentials: true },
+      {
+        withCredentials: true,
+        params: { withLoader },
+      },
     );
   }
 
