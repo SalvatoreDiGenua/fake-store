@@ -1,5 +1,6 @@
 <div class="fake-store-header">
   @let isBackToListProductVisible =
+    routerEvents()?.url.includes("account") ||
     routerEvents()?.url.includes("details") ||
     routerEvents()?.url.includes("cart");
   <p-toolbar>
