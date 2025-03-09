@@ -12,15 +12,36 @@
   overflow: auto;
 
   .p-card-content {
+    align-items: center;
+    justify-content: center;
     background: url("/fake-store-background-login.svg") no-repeat center;
   }
 
-  &__content {
+  &__header {
+    padding: 24px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--fake-store-text-color) 0px 1px 4px;
+    border-radius: var(--fake-store-card-border-radius);
+    padding: 40px;
   }
 
   &__avatar {
     --size-avatar: 150px;
+    position: absolute;
+    top: -95px;
+
+    p-avatar {
+      box-shadow: var(--fake-store-text-color) 0px 1px 4px;
+    }
 
     p-avatar,
     .p-avatar-icon {
@@ -33,6 +54,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+  }
+
+  &__info {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    &-name {
+      font-weight: 600;
     }
   }
 }

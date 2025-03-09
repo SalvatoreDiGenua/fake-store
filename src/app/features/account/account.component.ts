@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   HostBinding,
   inject,
   ViewEncapsulation,
@@ -11,11 +12,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Card } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { HeaderComponent } from '../../shared/components/header/header.component';
-import { FieldComponent } from './components/field/field.component';
+import { Button } from 'primeng/button';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-account',
-  imports: [HeaderComponent, Card, AvatarModule, FieldComponent],
+  imports: [HeaderComponent, Card, AvatarModule, Button, Tooltip],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -24,4 +26,10 @@ export class AccountComponent {
   @HostBinding('class') class = 'host-fake-store-account';
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   account = toSignal(this.#store.select(getUser));
+  linkRoboHash = computed(() => {
+    if (!this.account()) {
+      return '';
+    }
+    return `https://robohash.org/${this.account().username}`;
+  });
 }

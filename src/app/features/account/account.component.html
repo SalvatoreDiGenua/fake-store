@@ -2,13 +2,36 @@
 <div class="fake-store-account">
   @if (account()) {
     <p-card>
+      <ng-template #header>
+        <div class="fake-store-account__header">
+          <div>
+            <h2>My account</h2>
+            <small>{{ `@${account().username}` }}</small>
+          </div>
+          <p-button
+            [rounded]="true"
+            icon="pi pi-user-edit"
+            severity="info"
+            pTooltip="Edit account"
+            tooltipPosition="left"
+          ></p-button>
+        </div>
+      </ng-template>
       <ng-template #content>
         <div class="fake-store-account__content">
           <div class="fake-store-account__avatar">
-            <p-avatar icon="pi pi-user" size="xlarge" shape="circle" />
+            <p-avatar size="xlarge" shape="circle" [image]="linkRoboHash()" />
           </div>
           <div class="fake-store-account__info">
-            <app-field label="username" [value]="account().username" />
+            <h2 class="fake-store-account__info-name">
+              {{ `${account().name.firstname} ${account().name.lastname}` }}
+            </h2>
+            <h3 class="fake-store-account__info-email">
+              {{ account().email }}
+            </h3>
+            <h3 class="fake-store-account__info-iduser">
+              {{`Fake store ID: ${account().id}`}}
+            </h3>
           </div>
         </div>
       </ng-template>
