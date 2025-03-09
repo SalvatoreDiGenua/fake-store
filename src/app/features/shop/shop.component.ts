@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { ButtonCartComponent } from '../../shared/components/button-cart/button-cart.component';
 
@@ -9,4 +9,9 @@ import { ButtonCartComponent } from '../../shared/components/button-cart/button-
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
-export class ShopComponent {}
+export class ShopComponent {
+  #router = inject(Router);
+  constructor() {
+    this.#router.navigateByUrl('shop/products');
+  }
+}
