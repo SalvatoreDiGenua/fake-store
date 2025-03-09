@@ -2,17 +2,21 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { catchError, throwError } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 import { getTokenFromCookie } from '../shared/utility/cookie';
+import { LoaderService } from '../shared/services/loader.service';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
   const cookieService = inject(CookieService);
+  const loaderService = inject(LoaderService);
   const token = getTokenFromCookie(cookieService);
+
+  loaderService.isLoading.set(true);
 
   if (token) {
     req = req.clone({
-      setHeaders: { 'Authorization': `Authorization token ${token}` },
+      setHeaders: { Authorization: `Authorization token ${token}` },
     });
   }
 
@@ -20,6 +24,7 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) =>
       httpErrorInterceptor(error, messageService),
     ),
+    finalize(() => loaderService.isLoading.set(false)),
   );
 };
 
