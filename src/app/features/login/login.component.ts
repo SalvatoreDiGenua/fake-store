@@ -23,11 +23,16 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import { getUserRemote } from '../../shared/stores/user/user.actions';
+import {
+  getUserRemote,
+  removeUser,
+} from '../../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getUser } from '../../shared/stores/user/user.selectors';
 import { validateFormGroup } from '../../shared/utility/functions';
+import { CookieService } from 'ngx-cookie-service';
+import { removeTokenFromCookie } from '../../shared/utility/fake-store-functions';
 
 @Component({
   selector: 'app-login',
@@ -62,6 +67,13 @@ export class LoginComponent implements OnDestroy {
     }
     this.#router.navigateByUrl('shop/products');
   });
+
+  #cookieService: CookieService = inject(CookieService);
+
+  constructor() {
+    removeTokenFromCookie(this.#cookieService);
+    this.#store.dispatch(removeUser());
+  }
 
   login() {
     validateFormGroup(this.formLogin);

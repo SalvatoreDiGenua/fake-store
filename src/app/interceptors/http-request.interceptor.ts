@@ -1,10 +1,21 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
+import { getTokenFromCookie } from '../shared/utility/fake-store-functions';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
+  const cookieService = inject(CookieService);
+  const token = getTokenFromCookie(cookieService);
+
+  if (token) {
+    req = req.clone({
+      setHeaders: { 'Authorization': `Authorization token ${token}` },
+    });
+  }
+
   return next(req).pipe(
     catchError((error: HttpErrorResponse) =>
       httpErrorInterceptor(error, messageService),
