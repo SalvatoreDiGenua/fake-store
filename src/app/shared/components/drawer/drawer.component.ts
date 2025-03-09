@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
 import { Button } from 'primeng/button';
 import { AuthService } from '../../../services/auth.service';
+import { getUser } from '../../stores/user/user.selectors';
 
 @Component({
   selector: 'app-drawer',
@@ -55,6 +56,7 @@ export class DrawerComponent {
     });
     return _treeNodes;
   });
+  user = toSignal(this.#store.select(getUser));
 
   toggleVisible(value: boolean) {
     this.visible.set(value);
