@@ -11,7 +11,10 @@ export const routes: Routes = [
   {
     path: 'account',
     loadComponent: () =>
-      import('./features/account/account.component').then((m) => m.AccountComponent),
+      import('./features/account/account.component').then(
+        (m) => m.AccountComponent,
+      ),
+    canActivate: [isUserLoggedGuard],
   },
   {
     path: 'shop',
