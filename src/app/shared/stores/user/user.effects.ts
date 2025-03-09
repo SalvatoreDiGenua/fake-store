@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, of, switchMap } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { getUserRemote, updateUser } from './user.actions';
-import { setTokenIntoCookie } from '../../utility/fake-store-functions';
 import { CookieService } from 'ngx-cookie-service';
+import { setTokenIntoCookie } from '../../utility/localStorage';
 
 @Injectable()
 export class UserEffects {

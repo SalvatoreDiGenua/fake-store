@@ -19,10 +19,6 @@ import { ProductsBreadcrumbComponent } from '../../../../shared/components/produ
 import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { getProductsByCategory } from '../../../../shared/stores/products/products.selectors';
 import {
-  getIdProductFromLocalStorage,
-  removeIdProductFromLocalStorage,
-} from '../../../../shared/utility/fake-store-functions';
-import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../../../shared/utility/functions';
@@ -83,3 +79,11 @@ export class ProductsComponent {
     this.#router.navigateByUrl(`shop/products/${idProduct}/details`);
   }
 }
+function getIdProductFromLocalStorage() {
+  throw new Error('Function not implemented.');
+}
+
+function removeIdProductFromLocalStorage() {
+  throw new Error('Function not implemented.');
+}
+

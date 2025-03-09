@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { removeTokenFromCookie } from '../shared/utility/fake-store-functions';
 import { CookieService } from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../shared/stores/app.reducers';
 import { removeUser } from '../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
+import { removeTokenFromCookie } from '../shared/utility/localStorage';
 
 @Injectable({
   providedIn: 'root',

@@ -12,7 +12,6 @@ import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { addProductToCart } from '../../../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
 import { FieldsetModule } from 'primeng/fieldset';
-import { setIdProductIntoLocalStorage } from '../../../../shared/utility/fake-store-functions';
 
 @Component({
   selector: 'app-product-details',
@@ -50,4 +49,7 @@ export class ProductDetailsComponent {
       detail: `${productDetails.title} added to cart`,
     });
   }
+}
+function setIdProductIntoLocalStorage(arg0: string) {
+  throw new Error('Function not implemented.');
 }

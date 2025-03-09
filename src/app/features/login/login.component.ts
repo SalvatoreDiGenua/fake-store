@@ -32,7 +32,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { getUser } from '../../shared/stores/user/user.selectors';
 import { validateFormGroup } from '../../shared/utility/functions';
 import { CookieService } from 'ngx-cookie-service';
-import { removeTokenFromCookie } from '../../shared/utility/fake-store-functions';
+import { removeTokenFromCookie } from '../../shared/utility/localStorage';
 
 @Component({
   selector: 'app-login',

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
-import { getTokenFromCookie } from '../shared/utility/fake-store-functions';
+import { getTokenFromCookie } from '../shared/utility/localStorage';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);

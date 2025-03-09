@@ -31,7 +31,6 @@ import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { ItemCart } from '../../models/itemCart';
-import { removeIdProductFromLocalStorage } from '../../shared/utility/fake-store-functions';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
@@ -116,3 +115,7 @@ export class CartComponent {
     this.#store.dispatch(addProductToCart({ product: newItemCart }));
   }
 }
+function removeIdProductFromLocalStorage() {
+  throw new Error('Function not implemented.');
+}
+
