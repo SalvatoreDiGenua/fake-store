@@ -15,10 +15,12 @@ import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
 import { RouterLink } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
+import { Button } from 'primeng/button';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, RouterLink, LogoComponent],
+  imports: [DrawerModule, TreeModule, RouterLink, LogoComponent, Button],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -26,6 +28,7 @@ import { LogoComponent } from '../logo/logo.component';
 export class DrawerComponent {
   visible = signal(false);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #authService: AuthService = inject(AuthService);
   productCategories = toSignal(this.#store.pipe(select(getProductCategories)));
   treeNodes: Signal<TreeNode[]> = computed(() => {
     const _treeNodes: TreeNode<{
@@ -55,5 +58,9 @@ export class DrawerComponent {
 
   toggleVisible(value: boolean) {
     this.visible.set(value);
+  }
+
+  logout() {
+    this.#authService.logout();
   }
 }

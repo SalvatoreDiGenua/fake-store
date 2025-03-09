@@ -23,4 +23,17 @@
       </a>
     </ng-template>
   </p-tree>
+
+  <ng-template #footer>
+    <div class="fake-store-drawer__footer">
+      <p-button label="Account" icon="pi pi-user" variant="outlined" />
+      <p-button
+        label="Logout"
+        icon="pi pi-sign-out"
+        severity="danger"
+        variant="outlined"
+        (onClick)="logout()"
+      />
+    </div>
+  </ng-template>
 </p-drawer>

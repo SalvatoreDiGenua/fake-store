@@ -1,6 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { removeTokenFromCookie } from '../shared/utility/fake-store-functions';
+import { CookieService } from 'ngx-cookie-service';
+import { Store } from '@ngrx/store';
+import { FakeStoreReducers } from '../shared/stores/app.reducers';
+import { removeUser } from '../shared/stores/user/user.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +14,9 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   #AUTH_URL = `${environment.BASE_URL}/auth/login`;
   #httpClient: HttpClient = inject(HttpClient);
+  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #cookieService: CookieService = inject(CookieService);
+  #router: Router = inject(Router);
 
   login(username: string, password: string) {
     if (!username) {
@@ -25,5 +34,11 @@ export class AuthService {
       },
       { withCredentials: true },
     );
+  }
+
+  logout() {
+    this.#store.dispatch(removeUser());
+    removeTokenFromCookie(this.#cookieService);
+    this.#router.navigateByUrl('login');
   }
 }
