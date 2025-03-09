@@ -1,5 +1,6 @@
 import {
   Component,
+  effect,
   HostBinding,
   inject,
   OnDestroy,
@@ -20,9 +21,12 @@ import { Button } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getUserRemote } from '../../shared/stores/user/user.actions';
+import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { isUserLogged } from '../../shared/stores/user/user.selectors';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +53,14 @@ export class LoginComponent implements OnDestroy {
   #messageService: MessageService = inject(MessageService);
   #authService: AuthService = inject(AuthService);
   #loginSubscription: Subscription = new Subscription();
+  #router: Router = inject(Router);
+  isUserLogged = toSignal(this.#store.pipe(select(isUserLogged)));
+  getAllProductsRemoteEffect = effect(() => {
+    if (!this.isUserLogged()) {
+      return;
+    }
+    this.#router.navigateByUrl('shop/products')
+  });
 
   validateFormLogin() {
     Object.values(this.formLogin.controls).forEach((el) => el.markAsDirty());

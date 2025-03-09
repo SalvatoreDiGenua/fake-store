@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { hasCartProducts } from './guards/has-cart-products.guard';
+import { isUserLoggedGuard } from './guards/is-user-logged.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
     path: 'shop',
     loadComponent: () =>
       import('./features/shop/shop.component').then((m) => m.ShopComponent),
+    canActivate: [isUserLoggedGuard],
     children: [
       {
         path: 'products',
@@ -18,6 +20,7 @@ export const routes: Routes = [
           import('./features/shop/components/products/products.component').then(
             (m) => m.ProductsComponent,
           ),
+        canActivate: [isUserLoggedGuard],
       },
       {
         path: 'products/:idProduct/details',
@@ -25,6 +28,7 @@ export const routes: Routes = [
           import(
             './features/shop/components/product-details/product-details.component'
           ).then((m) => m.ProductDetailsComponent),
+        canActivate: [isUserLoggedGuard],
       },
     ],
   },
@@ -32,6 +36,7 @@ export const routes: Routes = [
     path: 'cart',
     loadComponent: () =>
       import('./features/cart/cart.component').then((m) => m.CartComponent),
+    canActivate: [isUserLoggedGuard],
   },
   {
     path: 'checkout',
@@ -39,7 +44,7 @@ export const routes: Routes = [
       import('./features/checkout/checkout.component').then(
         (m) => m.CheckoutComponent,
       ),
-    canActivate: [hasCartProducts],
+    canActivate: [isUserLoggedGuard, hasCartProducts],
   },
   {
     path: 'order-confirmed',
@@ -47,7 +52,7 @@ export const routes: Routes = [
       import('./features/order-confirmed/order-confirmed.component').then(
         (m) => m.OrderConfirmedComponent,
       ),
-    canActivate: [hasCartProducts],
+    canActivate: [isUserLoggedGuard, hasCartProducts],
   },
   {
     path: '**',
