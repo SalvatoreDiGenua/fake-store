@@ -6,10 +6,9 @@ import { catchError, throwError } from 'rxjs';
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
   return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      httpErrorInterceptor(error, messageService);
-      return throwError(() => error);
-    }),
+    catchError((error: HttpErrorResponse) =>
+      httpErrorInterceptor(error, messageService),
+    ),
   );
 };
 
@@ -37,4 +36,5 @@ const httpErrorInterceptor = (
         break;
     }
   }
+  return throwError(() => error);
 };
