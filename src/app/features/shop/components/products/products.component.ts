@@ -22,6 +22,7 @@ import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../../../shared/utility/functions';
+import { getIdProductFromLocalStorage, removeIdProductFromLocalStorage } from '../../../../shared/utility/localStorage';
 
 @Component({
   selector: 'app-products',
@@ -79,11 +80,3 @@ export class ProductsComponent {
     this.#router.navigateByUrl(`shop/products/${idProduct}/details`);
   }
 }
-function getIdProductFromLocalStorage() {
-  throw new Error('Function not implemented.');
-}
-
-function removeIdProductFromLocalStorage() {
-  throw new Error('Function not implemented.');
-}
-

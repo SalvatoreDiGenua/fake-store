@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../shared/stores/app.reducers';
 import { removeUser } from '../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
-import { removeTokenFromCookie } from '../shared/utility/localStorage';
+import { removeTokenFromCookie } from '../shared/utility/cookie';
 
 @Injectable({
   providedIn: 'root',

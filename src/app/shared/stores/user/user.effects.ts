@@ -4,7 +4,7 @@ import { map, of, switchMap } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { getUserRemote, updateUser } from './user.actions';
 import { CookieService } from 'ngx-cookie-service';
-import { setTokenIntoCookie } from '../../utility/localStorage';
+import { setTokenIntoCookie } from '../../utility/cookie';
 
 @Injectable()
 export class UserEffects {

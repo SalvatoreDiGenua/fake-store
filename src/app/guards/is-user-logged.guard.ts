@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { getUserRemote } from '../shared/stores/user/user.actions';
 import { getUser } from '../shared/stores/user/user.selectors';
 import { firstValueFrom } from 'rxjs';
-import { getTokenFromCookie } from '../shared/utility/localStorage';
+import { getTokenFromCookie } from '../shared/utility/cookie';
 
 export const isUserLoggedGuard: CanActivateFn = async () => {
   const store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
