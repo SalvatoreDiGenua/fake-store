@@ -12,7 +12,6 @@ export const routes: Routes = [
     path: 'shop',
     loadComponent: () =>
       import('./features/shop/shop.component').then((m) => m.ShopComponent),
-    canActivate: [isUserLoggedGuard],
     children: [
       {
         path: 'products',
