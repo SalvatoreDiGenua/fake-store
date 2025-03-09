@@ -14,6 +14,7 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AddressShippingComponent } from './components/address-shipping/address-shipping.component';
 import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
 import { MessageService } from 'primeng/api';
+import { validateFormGroup } from '../../shared/utility/functions';
 
 @Component({
   selector: 'app-checkout',
@@ -39,10 +40,8 @@ export class CheckoutComponent {
   #messageService: MessageService = inject(MessageService);
 
   confirmOrder() {
-    Object.values({
-      ...this.addressShippingRef().formAddressShipping.controls,
-      ...this.paymentInfoComponentgRef().formPaymentInfo.controls,
-    }).forEach((el) => el.markAsDirty());
+    validateFormGroup(this.addressShippingRef().formAddressShipping);
+    validateFormGroup(this.paymentInfoComponentgRef().formPaymentInfo);
 
     if (
       this.addressShippingRef().formAddressShipping.invalid ||

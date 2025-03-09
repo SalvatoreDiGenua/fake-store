@@ -1,3 +1,5 @@
+import { FormGroup } from "@angular/forms";
+
 export const randomIntFromInterval = (min = 0, max = 5) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -18,4 +20,8 @@ export const scrollIntoView = (element: HTMLElement, withAnimation = false) => {
   if (withAnimation) {
     element.classList.add('jello-horizontal');
   }
+};
+
+export const validateFormGroup = (formGroup: FormGroup) => {
+  Object.values(formGroup.controls).forEach((el) => el.markAsDirty());
 };

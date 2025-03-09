@@ -27,6 +27,7 @@ import { getUserRemote } from '../../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getUser } from '../../shared/stores/user/user.selectors';
+import { validateFormGroup } from '../../shared/utility/functions';
 
 @Component({
   selector: 'app-login',
@@ -62,12 +63,8 @@ export class LoginComponent implements OnDestroy {
     this.#router.navigateByUrl('shop/products');
   });
 
-  validateFormLogin() {
-    Object.values(this.formLogin.controls).forEach((el) => el.markAsDirty());
-  }
-
   login() {
-    this.validateFormLogin();
+    validateFormGroup(this.formLogin);
     if (this.formLogin.invalid) {
       this.#messageService.add({
         severity: 'error',
