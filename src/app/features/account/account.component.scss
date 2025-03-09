@@ -1,0 +1,38 @@
+.host-fake-store-account {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.fake-store-account {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 10px;
+  overflow: auto;
+
+  .p-card-content {
+    background: url("/fake-store-background-login.svg") no-repeat center;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__avatar {
+    --size-avatar: 150px;
+
+    p-avatar,
+    .p-avatar-icon {
+      font-size: calc(
+        var(--size-avatar) - calc(var(--size-avatar) / 4 + 10px)
+      ) !important;
+      width: var(--size-avatar) !important;
+      height: var(--size-avatar) !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

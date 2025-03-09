@@ -1,1 +1,17 @@
-<p>account works!</p>
+<app-header />
+<div class="fake-store-account">
+  @if (account()) {
+    <p-card>
+      <ng-template #content>
+        <div class="fake-store-account__content">
+          <div class="fake-store-account__avatar">
+            <p-avatar icon="pi pi-user" size="xlarge" shape="circle" />
+          </div>
+          <div class="fake-store-account__info">
+            <app-field label="username" [value]="account().username" />
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+  }
+</div>
