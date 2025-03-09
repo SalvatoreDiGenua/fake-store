@@ -16,6 +16,7 @@ export class ProductsService {
       {
         url: this.#PRODUCTS_URL,
         method: 'GET',
+        withCredentials: true,
       },
       {
         defaultValue: [],
@@ -24,7 +25,9 @@ export class ProductsService {
   }
 
   getAllProductsRx() {
-    return this.#httpClient.get<Product[]>(this.#PRODUCTS_URL);
+    return this.#httpClient.get<Product[]>(this.#PRODUCTS_URL, {
+      withCredentials: true,
+    });
   }
 
   getSingleProduct(idProduct: Signal<number>) {
@@ -33,6 +36,7 @@ export class ProductsService {
       loader: ({ request, abortSignal }) =>
         fetch(`${this.#PRODUCTS_URL}/${request.idProduct}`, {
           signal: abortSignal,
+          credentials: 'include',
         }).then((response) => response.json()),
       defaultValue: PLACEHOLDER_PRODUCT,
     });

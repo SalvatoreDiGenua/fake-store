@@ -21,11 +21,13 @@ import { ProductsEffects } from './shared/stores/products/products.effects';
 import { httpRequestInterceptor } from './interceptors/http-request.interceptor';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { UserEffects } from './shared/stores/user/user.effects';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     MessageService,
     ConfirmationService,
+    CookieService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
     provideHttpClient(withInterceptors([httpRequestInterceptor])),
