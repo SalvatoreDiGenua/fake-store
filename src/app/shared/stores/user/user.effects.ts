@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, of, switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { getUserRemote, updateUser } from './user.actions';
 import { CookieService } from 'ngx-cookie-service';

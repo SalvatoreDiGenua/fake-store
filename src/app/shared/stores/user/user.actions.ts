@@ -12,3 +12,5 @@ export const updateUser = createAction(
 );
 
 export const removeUser = createAction('[USER] Remove user');
+
+export const setUserGuest = createAction('[USER] Login as Guest');

@@ -26,9 +26,20 @@
             <label for="password">Password</label>
           </p-iftalabel>
           <div class="fake-store-login__form-password-recovery">
-            <p-button label="password forget?" variant="text" severity="secondary"/>
+            <p-button
+              label="password forget?"
+              variant="text"
+              severity="secondary"
+            />
           </div>
-          <p-button label="Login" severity="info" (onClick)="login()" />
+        </div>
+        <div class="fake-store-login__actions">
+          <p-button label="Login" severity="info" (onClick)="userLogin()" />
+          <p-button
+            label="Login as guest"
+            severity="secondary"
+            (onClick)="guestLogin()"
+          />
         </div>
       </div>
     </ng-template>

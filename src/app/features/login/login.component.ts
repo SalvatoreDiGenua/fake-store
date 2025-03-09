@@ -26,6 +26,7 @@ import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import {
   getUserRemote,
   removeUser,
+  setUserGuest,
 } from '../../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -33,6 +34,7 @@ import { getUser } from '../../shared/stores/user/user.selectors';
 import { validateFormGroup } from '../../shared/utility/functions';
 import { CookieService } from 'ngx-cookie-service';
 import { removeTokenFromCookie } from '../../shared/utility/cookie';
+import { LOGIN_GUEST } from '../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -75,7 +77,7 @@ export class LoginComponent implements OnDestroy {
     this.#store.dispatch(removeUser());
   }
 
-  login() {
+  userLogin() {
     validateFormGroup(this.formLogin);
     if (this.formLogin.invalid) {
       this.#messageService.add({
@@ -91,6 +93,14 @@ export class LoginComponent implements OnDestroy {
       .subscribe((res) =>
         this.#store.dispatch(getUserRemote({ token: res.token })),
       );
+  }
+
+  guestLogin() {
+    this.formLogin.patchValue({
+      username: LOGIN_GUEST.username,
+      password: LOGIN_GUEST.password,
+    });
+    this.#store.dispatch(setUserGuest());
   }
 
   ngOnDestroy() {

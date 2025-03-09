@@ -8,13 +8,15 @@
             <h2>My account</h2>
             <small>{{ `@${account().username}` }}</small>
           </div>
-          <p-button
-            [rounded]="true"
-            icon="pi pi-user-edit"
-            severity="info"
-            pTooltip="Edit account"
-            tooltipPosition="left"
-          ></p-button>
+          @if (!isUserGuest()) {
+            <p-button
+              [rounded]="true"
+              icon="pi pi-user-edit"
+              severity="info"
+              pTooltip="Edit account"
+              tooltipPosition="left"
+            />
+          }
         </div>
       </ng-template>
       <ng-template #content>

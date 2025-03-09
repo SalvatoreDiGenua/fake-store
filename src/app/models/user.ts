@@ -25,3 +25,25 @@ export interface UserName {
   firstname: string;
   lastname: string;
 }
+
+export const LOGIN_GUEST: User = {
+  address: {
+    geolocation: {
+      lat: null,
+      long: null,
+    },
+    city: null,
+    street: null,
+    number: null,
+    zipcode: null,
+  },
+  id: -1,
+  email: 'user.guest@fakestore.com',
+  username: 'Guest',
+  password: 'guest',
+  name: {
+    firstname: 'User',
+    lastname: 'Guest',
+  },
+  phone: null,
+};
