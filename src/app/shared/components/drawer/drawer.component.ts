@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
-import { TreeNode, PrimeIcons } from 'primeng/api';
+import { TreeNode, PrimeIcons, ConfirmationService } from 'primeng/api';
 import { getProductCategories } from '../../stores/products/products.selectors';
 import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
@@ -30,6 +30,7 @@ export class DrawerComponent {
   visible = signal(false);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #authService: AuthService = inject(AuthService);
+  #confirmationService: ConfirmationService = inject(ConfirmationService);
   productCategories = toSignal(this.#store.pipe(select(getProductCategories)));
   treeNodes: Signal<TreeNode[]> = computed(() => {
     const _treeNodes: TreeNode<{
@@ -62,7 +63,23 @@ export class DrawerComponent {
     this.visible.set(value);
   }
 
-  logout() {
-    this.#authService.logout();
+  logout(event: Event) {
+    this.#confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure you want to logout?',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-sign-out',
+      rejectButtonProps: {
+        label: 'No',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Yes',
+      },
+      accept: () => this.#authService.logout(),
+    });
   }
 }
