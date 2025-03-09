@@ -23,15 +23,10 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
-import {
-  getUserRemote,
-  removeUser,
-} from '../../shared/stores/user/user.actions';
+import { getUserRemote } from '../../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { isUserLogged } from '../../shared/stores/user/user.selectors';
-import { removeTokenFromCookie } from '../../shared/utility/fake-store-functions';
-import { CookieService } from 'ngx-cookie-service';
+import { getUser } from '../../shared/stores/user/user.selectors';
 
 @Component({
   selector: 'app-login',
@@ -59,19 +54,13 @@ export class LoginComponent implements OnDestroy {
   #authService: AuthService = inject(AuthService);
   #loginSubscription: Subscription = new Subscription();
   #router: Router = inject(Router);
-  isUserLogged = toSignal(this.#store.pipe(select(isUserLogged)));
-  getAllProductsRemoteEffect = effect(() => {
+  isUserLogged = toSignal(this.#store.pipe(select(getUser)));
+  goToProductsPageEffect = effect(() => {
     if (!this.isUserLogged()) {
       return;
     }
     this.#router.navigateByUrl('shop/products');
   });
-  #cookieService: CookieService = inject(CookieService);
-
-  constructor() {
-    removeTokenFromCookie(this.#cookieService);
-    this.#store.dispatch(removeUser());
-  }
 
   validateFormLogin() {
     Object.values(this.formLogin.controls).forEach((el) => el.markAsDirty());

@@ -5,7 +5,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { select, Store } from '@ngrx/store';
 import { FakeStoreReducers } from './shared/stores/app.reducers';
 import { getAllProductsRemote } from './shared/stores/products/products.actions';
-import { isUserLogged } from './shared/stores/user/user.selectors';
+import { getUser } from './shared/stores/user/user.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -16,7 +16,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class AppComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
-  isUserLogged = toSignal(this.#store.pipe(select(isUserLogged)))
+  isUserLogged = toSignal(this.#store.pipe(select(getUser)))
   getAllProductsRemoteEffect = effect(() => {
     if (!this.isUserLogged()) {
       return;
