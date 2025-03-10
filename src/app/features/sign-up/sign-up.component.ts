@@ -12,6 +12,7 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { validateFormGroup } from '../../shared/utility/functions';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,6 +24,7 @@ import { validateFormGroup } from '../../shared/utility/functions';
     ReactiveFormsModule,
     PasswordModule,
     Button,
+    RouterLink
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
