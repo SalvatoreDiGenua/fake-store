@@ -5,6 +5,6 @@ import { removeUser, setUserGuest, updateUser } from './user.actions';
 export const userReducers = createReducer<User>(
   null,
   on(updateUser, (currentUserState, action) => action.user),
-  on(removeUser, () => null),
+  on(removeUser, () => null as User),
   on(setUserGuest, () => LOGIN_GUEST),
 );
