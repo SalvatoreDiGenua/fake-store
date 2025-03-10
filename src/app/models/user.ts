@@ -47,3 +47,9 @@ export const LOGIN_GUEST: User = {
   },
   phone: null,
 };
+
+export interface NewUsersPayload {
+  username: string;
+  email: string;
+  password: string;
+}
