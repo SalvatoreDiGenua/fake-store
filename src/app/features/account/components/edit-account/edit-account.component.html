@@ -1,0 +1,36 @@
+<div class="fake-store-edit-account fake-store-main-component-container">
+  <div class="fake-store-edit-account__forms">
+    <p-tabs [value]="0">
+      <p-tablist>
+        @for (tab of tabsEditAccount; track tab) {
+          <p-tab [value]="tab.value">
+            <i [class]="tab.icon"></i>
+            <span>{{ tab.label }}</span>
+          </p-tab>
+        }
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel [value]="0">
+          <div
+            class="fake-store-edit-account__forms-master-data"
+            [formGroup]="formEditAccount"
+          >
+            <p-iftalabel>
+              <input pInputText id="username" formControlName="username" />
+              <label for="username">Username</label>
+            </p-iftalabel>
+            <p-iftalabel>
+              <input pInputText id="email" formControlName="email" />
+              <label for="email">Email</label>
+            </p-iftalabel>
+          </div>
+        </p-tabpanel>
+        <p-tabpanel [value]="1"></p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+  <div class="fake-store-edit-account__actions">
+    <p-button label="Cancel" severity="secondary" (onClick)="onClose()" />
+    <p-button label="Update" (onClick)="updateUser()"/>
+  </div>
+</div>

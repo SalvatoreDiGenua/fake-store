@@ -14,6 +14,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { Button } from 'primeng/button';
 import { Tooltip } from 'primeng/tooltip';
+import { DialogService } from 'primeng/dynamicdialog';
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
 
 @Component({
   selector: 'app-account',
@@ -33,4 +35,15 @@ export class AccountComponent {
     }
     return `https://robohash.org/${this.account().username}`;
   });
+  #dialogService: DialogService = inject(DialogService);
+
+  openDialogEditAccount() {
+    this.#dialogService.open(EditAccountComponent, {
+      modal: true,
+      header: 'Edit account',
+      width: '800px',
+      height: '600px',
+      closable: true,
+    });
+  }
 }

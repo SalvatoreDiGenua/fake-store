@@ -1,0 +1,32 @@
+.host-fake-store-edit-account {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.fake-store-edit-account {
+  padding: 0;
+
+  .p-tab {
+    gap: 5px;
+  }
+
+  &__forms {
+    flex: 1 1 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    &-master-data {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+}

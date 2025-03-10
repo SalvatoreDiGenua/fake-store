@@ -53,3 +53,5 @@ export interface NewUsersPayload {
   email: string;
   password: string;
 }
+
+export type UpdateUserPayload = Omit<NewUsersPayload, 'password'>;
