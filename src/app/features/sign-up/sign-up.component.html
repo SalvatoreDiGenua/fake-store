@@ -1,0 +1,62 @@
+<div class="fake-store-signup fake-store-main-component-container">
+  <p-card>
+    <ng-template #content>
+      <div class="fake-store-signup__content">
+        <div class="fake-store-signup__avatar">
+          <p-avatar icon="pi pi-user-plus" size="xlarge" shape="circle" />
+        </div>
+        <div class="fake-store-signup__form" [formGroup]="formSignUp">
+          <p-iftalabel>
+            <input
+              pInputText
+              id="username"
+              pSize="large"
+              formControlName="username"
+            />
+            <label for="username">Username</label>
+          </p-iftalabel>
+          <p-iftalabel>
+            <input
+              pInputText
+              id="firstname"
+              pSize="large"
+              formControlName="firstname"
+            />
+            <label for="firstname">First name</label>
+          </p-iftalabel>
+          <p-iftalabel>
+            <input
+              pInputText
+              id="lastname"
+              pSize="large"
+              formControlName="lastname"
+            />
+            <label for="lastname">Last name</label>
+          </p-iftalabel>
+          <p-iftalabel>
+            <p-password
+              id="password"
+              size="large"
+              formControlName="password"
+              [toggleMask]="true"
+              size="large"
+            >
+              <ng-template #footer>
+                <ul>
+                  <li>At least one lowercase</li>
+                  <li>At least one uppercase</li>
+                  <li>At least one numeric</li>
+                  <li>Minimum 8 characters</li>
+                </ul>
+              </ng-template>
+            </p-password>
+            <label for="password">Password</label>
+          </p-iftalabel>
+        </div>
+        <div class="fake-store-signup__actions">
+          <p-button label="Register" (onClick)="register()" />
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

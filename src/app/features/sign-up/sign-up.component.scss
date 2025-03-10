@@ -1,10 +1,10 @@
-.host-fake-store-login {
+.host-fake-store-signup {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
 }
 
-.fake-store-login {
+.fake-store-signup {
   .p-card-content {
     align-items: center;
     justify-content: center;
@@ -47,10 +47,6 @@
     button {
       width: 100%;
     }
-    &-signup {
-      display: flex;
-      justify-content: flex-end;
-    }
   }
 
   &__actions {
@@ -66,7 +62,7 @@
 }
 
 @media (width <= 550px) {
-  .fake-store-login {
+  .fake-store-signup {
     &__content {
       padding: 0;
       box-shadow: none;

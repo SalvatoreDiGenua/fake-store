@@ -28,7 +28,7 @@ import {
   removeUser,
   setUserGuest,
 } from '../../shared/stores/user/user.actions';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getUser } from '../../shared/stores/user/user.selectors';
 import { validateFormGroup } from '../../shared/utility/functions';
@@ -46,6 +46,7 @@ import { LOGIN_GUEST } from '../../models/user';
     ReactiveFormsModule,
     PasswordModule,
     Button,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
