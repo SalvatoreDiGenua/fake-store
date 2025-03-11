@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { catchError, finalize, throwError } from 'rxjs';
+import { catchError, delay, finalize, throwError } from 'rxjs';
 import { getTokenFromCookie } from '../shared/utility/cookie';
 import { LoaderService } from '../shared/services/loader.service';
 
@@ -27,6 +27,7 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) =>
       httpErrorInterceptor(error, messageService),
     ),
+    delay(300),
     finalize(() => loaderService.isLoading.set(false)),
   );
 };
