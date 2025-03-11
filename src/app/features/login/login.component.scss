@@ -22,23 +22,6 @@
     border-radius: var(--fake-store-card-border-radius);
   }
 
-  &__avatar {
-    --size-avatar: 200px;
-
-    p-avatar,
-    .p-avatar-icon {
-      font-size: calc(
-        var(--size-avatar) - calc(var(--size-avatar) / 4 + 10px)
-      ) !important;
-      width: var(--size-avatar) !important;
-      height: var(--size-avatar) !important;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
   &__form {
     display: flex;
     flex-direction: column;

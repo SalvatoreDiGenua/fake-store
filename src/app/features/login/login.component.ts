@@ -7,7 +7,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Card } from 'primeng/card';
-import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import {
@@ -35,12 +34,13 @@ import { validateFormGroup } from '../../shared/utility/functions';
 import { CookieService } from 'ngx-cookie-service';
 import { removeTokenFromCookie } from '../../shared/utility/cookie';
 import { LOGIN_GUEST } from '../../models/user';
+import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
 
 @Component({
   selector: 'app-login',
   imports: [
     Card,
-    AvatarModule,
+    AvatarComponent,
     InputTextModule,
     IftaLabelModule,
     ReactiveFormsModule,

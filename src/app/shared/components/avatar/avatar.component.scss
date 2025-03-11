@@ -1,0 +1,22 @@
+.host-fake-store-avatar {
+  display: flex;
+  flex-direction: column;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+}
+
+.fake-store-avatar {
+  flex: 0 0 100%;
+  p-avatar,
+  .p-avatar-icon {
+    font-size: calc(
+      var(--size-avatar) - calc(var(--size-avatar) / 4 + 10px)
+    ) !important;
+    width: var(--size-avatar) !important;
+    height: var(--size-avatar) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
