@@ -5,37 +5,41 @@
         <div class="fake-store-login__avatar">
           <app-avatar icon="pi pi-user" size="xlarge" />
         </div>
-        <div class="fake-store-login__form" [formGroup]="formLogin">
-          <p-iftalabel>
-            <input
-              pInputText
-              id="username"
-              pSize="large"
-              formControlName="username"
-            />
-            <label for="username">Username</label>
-          </p-iftalabel>
-          <p-iftalabel>
-            <p-password
-              id="password"
-              size="large"
-              formControlName="password"
-              [toggleMask]="true"
-              [feedback]="false"
-            />
-            <label for="password">Password</label>
-          </p-iftalabel>
-          <div class="fake-store-login__form-signup">
-            <p-button
-              label="Sign up"
-              variant="text"
-              severity="secondary"
-              routerLink="/sign-up"
-            />
+        @if (false) {
+          <div class="fake-store-login__form" [formGroup]="formLogin">
+            <p-iftalabel>
+              <input
+                pInputText
+                id="username"
+                pSize="large"
+                formControlName="username"
+              />
+              <label for="username">Username</label>
+            </p-iftalabel>
+            <p-iftalabel>
+              <p-password
+                id="password"
+                size="large"
+                formControlName="password"
+                [toggleMask]="true"
+                [feedback]="false"
+              />
+              <label for="password">Password</label>
+            </p-iftalabel>
+            <div class="fake-store-login__form-signup">
+              <p-button
+                label="Sign up"
+                variant="text"
+                severity="secondary"
+                routerLink="/sign-up"
+              />
+            </div>
           </div>
-        </div>
+        }
         <div class="fake-store-login__actions">
-          <p-button label="Login" severity="info" (onClick)="userLogin()" />
+          @if(false) {
+            <p-button label="Login" severity="info" (onClick)="userLogin()" />
+          }
           <p-button
             label="Login as guest"
             severity="secondary"
