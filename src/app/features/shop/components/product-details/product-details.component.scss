@@ -36,10 +36,14 @@
   }
 }
 
-
 @media (width <= 550px) {
   .fake-store-product-details {
-    padding: 10px;
+    &__top {
+      flex-direction: column;
+      align-items: center;
+      app-product-image {
+        padding: 0 10px;
+      }
+    }
   }
 }
-
