@@ -33,7 +33,7 @@ export class AuthService {
         password,
       },
       {
-        withCredentials: true,
+        withCredentials: false,
         params: { withLoader },
       },
     );

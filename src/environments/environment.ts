@@ -1,3 +1,3 @@
 export const environment = {
-  BASE_URL: '/api',
+  BASE_URL: 'https://fakestoreapi.com',
 };
