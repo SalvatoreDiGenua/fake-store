@@ -13,6 +13,9 @@ export class ProductsService {
   #httpClient: HttpClient = inject(HttpClient);
 
   getAllProducts(withLoader = true) {
+    console.log('#PRODUCTS_URL', this.#PRODUCTS_URL);
+    console.log({ environment });
+
     return httpResource<Product[]>(
       {
         url: this.#PRODUCTS_URL,
@@ -27,6 +30,8 @@ export class ProductsService {
   }
 
   getAllProductsRx(withLoader = true) {
+    console.log('#PRODUCTS_URL', this.#PRODUCTS_URL);
+    console.log({ environment });
     return this.#httpClient.get<Product[]>(this.#PRODUCTS_URL, {
       withCredentials: true,
       params: { withLoader },
