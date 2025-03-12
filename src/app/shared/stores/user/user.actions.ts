@@ -6,6 +6,8 @@ export const getUserRemote = createAction(
   props<{ token: string }>(),
 );
 
+export const getUserGuest = createAction('[USER] Get user guest');
+
 export const updateUser = createAction(
   '[USER] Update user',
   props<{ user: User }>(),
@@ -13,4 +15,7 @@ export const updateUser = createAction(
 
 export const removeUser = createAction('[USER] Remove user');
 
-export const setUserGuest = createAction('[USER] Login as Guest');
+export const setUserGuest = createAction(
+  '[USER] Login as Guest',
+  props<{ userGuest: User }>(),
+);

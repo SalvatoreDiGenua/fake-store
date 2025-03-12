@@ -55,3 +55,5 @@ export interface NewUsersPayload {
 }
 
 export type UpdateUserPayload = Omit<NewUsersPayload, 'password'>;
+
+export const USER_GUEST_COOKIE = 'USER_GUEST';

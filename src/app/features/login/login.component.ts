@@ -23,9 +23,9 @@ import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import {
+  getUserGuest,
   getUserRemote,
   removeUser,
-  setUserGuest,
 } from '../../shared/stores/user/user.actions';
 import { Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -46,7 +46,7 @@ import { AvatarComponent } from '../../shared/components/avatar/avatar.component
     ReactiveFormsModule,
     PasswordModule,
     Button,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -101,7 +101,7 @@ export class LoginComponent implements OnDestroy {
       username: LOGIN_GUEST.username,
       password: LOGIN_GUEST.password,
     });
-    this.#store.dispatch(setUserGuest());
+    this.#store.dispatch(getUserGuest());
   }
 
   ngOnDestroy() {
