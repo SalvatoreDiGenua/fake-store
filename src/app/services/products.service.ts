@@ -1,6 +1,6 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { Product } from '../models/product';
 import { PLACEHOLDER_PRODUCT } from '../shared/placeholder/placeholder-product';
 import { rxResource } from '@angular/core/rxjs-interop';
