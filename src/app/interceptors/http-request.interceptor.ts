@@ -1,28 +1,19 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { catchError, delay, finalize, throwError } from 'rxjs';
-import { getTokenFromCookie } from '../shared/utility/cookie';
 import { LoaderService } from '../shared/services/loader.service';
+import { CookieService } from '../shared/services/cookie.service';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
-  const cookieService = inject(CookieService);
   const loaderService = inject(LoaderService);
-  const token = getTokenFromCookie(cookieService);
-  const withLoader = req.params.get('withLoader') === 'true';
-
-  if (withLoader) {
-    loaderService.isLoading.set(true);
-  }
-
-  if (token) {
-    req = req.clone({
-      setHeaders: { Authorization: `Authorization token ${token}` },
-    });
-  }
-
+  loaderInterceptor(req, loaderService);
+  req = tokenInterceptor(req);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) =>
       httpErrorInterceptor(error, messageService),
@@ -51,10 +42,34 @@ const httpErrorInterceptor = (
         messageService.add({
           severity: 'error',
           summary: error.statusText,
-          detail: error.error,
+          detail: error.message,
         });
         break;
     }
   }
   return throwError(() => error);
+};
+
+const loaderInterceptor = (
+  req: HttpRequest<unknown>,
+  loaderService: LoaderService,
+) => {
+  const withLoader = req.params.get('withLoader') === 'true';
+
+  if (!withLoader) {
+    return;
+  }
+  loaderService.isLoading.set(true);
+};
+
+const tokenInterceptor = (req: HttpRequest<unknown>): HttpRequest<unknown> => {
+  const cookieService = inject(CookieService);
+  const token = cookieService.getTokenFromCookie();
+
+  if (!token) {
+    return req;
+  }
+  return req.clone({
+    setHeaders: { Authorization: `Authorization token ${token}` },
+  });
 };

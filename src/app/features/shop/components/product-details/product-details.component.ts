@@ -12,7 +12,7 @@ import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { addProductToCart } from '../../../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
 import { FieldsetModule } from 'primeng/fieldset';
-import { setIdProductIntoLocalStorage } from '../../../../shared/utility/localStorage';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-product-details',
@@ -34,12 +34,15 @@ export class ProductDetailsComponent {
   productDetails = this.#productsService.getSingleProduct(this.idProduct);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #messageService: MessageService = inject(MessageService);
+  #localStorageService: LocalStorageService = inject(LocalStorageService);
 
   setCurrentIdProductToScroll = effect(() => {
     if (this.productDetails.isLoading()) {
       return;
     }
-    setIdProductIntoLocalStorage(this.productDetails.value().id.toString());
+    this.#localStorageService.setIdProductIntoLocalStorage(
+      this.productDetails.value().id.toString(),
+    );
   });
 
   addProductToCart(productDetails: Product) {

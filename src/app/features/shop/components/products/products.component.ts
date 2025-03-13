@@ -22,10 +22,7 @@ import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../../../shared/utility/functions';
-import {
-  getIdProductFromLocalStorage,
-  removeIdProductFromLocalStorage,
-} from '../../../../shared/utility/localStorage';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-products',
@@ -53,6 +50,7 @@ export class ProductsComponent {
   });
   productListPlaceholder = Array(10);
   #router = inject(Router);
+  #localStorageService: LocalStorageService = inject(LocalStorageService);
 
   scrollToProduct = effect(() => {
     if (
@@ -63,7 +61,8 @@ export class ProductsComponent {
       return;
     }
 
-    const idProductToScroll = getIdProductFromLocalStorage();
+    const idProductToScroll =
+      this.#localStorageService.getIdProductFromLocalStorage();
     if (isNullOrUndefined(idProductToScroll)) {
       return;
     }
@@ -75,7 +74,7 @@ export class ProductsComponent {
     }
     setTimeout(() => {
       scrollIntoView(cardProductToScroll.el.nativeElement, true);
-      removeIdProductFromLocalStorage();
+      this.#localStorageService.removeIdProductFromLocalStorage();
     });
   });
 
