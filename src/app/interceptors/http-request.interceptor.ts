@@ -42,7 +42,7 @@ const httpErrorInterceptor = (
         messageService.add({
           severity: 'error',
           summary: error.statusText,
-          detail: error.error,
+          detail: error.message,
         });
         break;
     }
