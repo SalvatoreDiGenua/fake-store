@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { NewUsersPayload, UpdateUserPayload, User } from '../models/user';
 import { jwtDecode } from 'jwt-decode';
 import { isNullOrUndefined } from '../shared/utility/functions';
