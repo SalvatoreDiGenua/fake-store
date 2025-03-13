@@ -25,6 +25,11 @@ export const routes: Routes = [
   },
   {
     path: 'shop',
+    pathMatch: 'full',
+    redirectTo: 'shop/products',
+  },
+  {
+    path: 'shop',
     loadComponent: () =>
       import('./features/shop/shop.component').then((m) => m.ShopComponent),
     children: [
