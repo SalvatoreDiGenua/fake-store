@@ -17,7 +17,7 @@ export class ProductsService {
       {
         url: this.#PRODUCTS_URL,
         method: 'GET',
-        withCredentials: true,
+        withCredentials: false,
         params: { withLoader },
       },
       {
@@ -28,7 +28,7 @@ export class ProductsService {
 
   getAllProductsRx(withLoader = true) {
     return this.#httpClient.get<Product[]>(this.#PRODUCTS_URL, {
-      withCredentials: true,
+      withCredentials: false,
       params: { withLoader },
     });
   }
@@ -40,7 +40,7 @@ export class ProductsService {
         this.#httpClient.get<Product>(
           `${this.#PRODUCTS_URL}/${request.idProduct}`,
           {
-            withCredentials: true,
+            withCredentials: false,
             params: { withLoader },
           },
         ),

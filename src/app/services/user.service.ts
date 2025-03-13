@@ -18,7 +18,7 @@ export class UserService {
     }
 
     return this.#httpClient.get<User>(`${this.#USER_URL}/${idUser}`, {
-      withCredentials: true,
+      withCredentials: false,
       params: { withLoader },
     });
   }
@@ -36,7 +36,7 @@ export class UserService {
 
   getAllUsers(withLoader = true) {
     return this.#httpClient.get<User[]>(this.#USER_URL, {
-      withCredentials: true,
+      withCredentials: false,
       params: { withLoader },
     });
   }
@@ -46,7 +46,7 @@ export class UserService {
       throw new Error('payload is required');
     }
     return this.#httpClient.post<User>(this.#USER_URL, payload, {
-      withCredentials: true,
+      withCredentials: false,
       params: { withLoader },
     });
   }
@@ -60,7 +60,7 @@ export class UserService {
     }
 
     return this.#httpClient.put<User>(`${this.#USER_URL}/${idUser}`, payload, {
-      withCredentials: true,
+      withCredentials: false,
       params: { withLoader },
     });
   }
