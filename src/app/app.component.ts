@@ -17,11 +17,11 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 })
 export class AppComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
-  isUserLogged = toSignal(this.#store.pipe(select(getUser)))
+  isUserLogged = toSignal(this.#store.pipe(select(getUser)));
   getAllProductsRemoteEffect = effect(() => {
     if (!this.isUserLogged()) {
       return;
     }
     this.#store.dispatch(getAllProductsRemote());
-  })
+  });
 }

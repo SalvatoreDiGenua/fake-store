@@ -22,7 +22,10 @@ import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../../../shared/utility/functions';
-import { getIdProductFromLocalStorage, removeIdProductFromLocalStorage } from '../../../../shared/utility/localStorage';
+import {
+  getIdProductFromLocalStorage,
+  removeIdProductFromLocalStorage,
+} from '../../../../shared/utility/localStorage';
 
 @Component({
   selector: 'app-products',

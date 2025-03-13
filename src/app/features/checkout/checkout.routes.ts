@@ -6,9 +6,7 @@ export const checkoutRoutes: Routes = [
   {
     path: 'checkout',
     loadComponent: () =>
-      import('./checkout.component').then(
-        (m) => m.CheckoutComponent,
-      ),
+      import('./checkout.component').then((m) => m.CheckoutComponent),
     canActivate: [isUserLoggedGuard, hasCartProducts],
   },
 ];
