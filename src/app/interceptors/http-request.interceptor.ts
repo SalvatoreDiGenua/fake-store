@@ -1,16 +1,15 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { catchError, delay, finalize, throwError } from 'rxjs';
-import { getTokenFromCookie } from '../shared/utility/cookie';
 import { LoaderService } from '../shared/services/loader.service';
+import { CookieService } from '../shared/services/cookie.service';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
   const cookieService = inject(CookieService);
   const loaderService = inject(LoaderService);
-  const token = getTokenFromCookie(cookieService);
+  const token = cookieService.getTokenFromCookie();
   const withLoader = req.params.get('withLoader') === 'true';
 
   if (withLoader) {

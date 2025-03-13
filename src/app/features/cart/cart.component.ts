@@ -32,7 +32,7 @@ import { RouterLink } from '@angular/router';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { ItemCart } from '../../models/itemCart';
 import { HeaderComponent } from '../../shared/components/header/header.component';
-import { removeIdProductFromLocalStorage } from '../../shared/utility/localStorage';
+import { LocalStorageService } from '../../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -68,9 +68,10 @@ export class CartComponent {
       this.#store.select(getSingleItemCart(request.idCartItemPopover)),
     defaultValue: null,
   });
+  #localStorageService: LocalStorageService = inject(LocalStorageService); 
 
   constructor() {
-    removeIdProductFromLocalStorage();
+    this.#localStorageService.removeIdProductFromLocalStorage();
   }
 
   removeProductFromCart(event: Event, product: Product) {

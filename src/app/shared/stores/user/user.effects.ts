@@ -8,9 +8,8 @@ import {
   setUserGuest,
   updateUser,
 } from './user.actions';
-import { CookieService } from 'ngx-cookie-service';
-import { setTokenIntoCookie } from '../../utility/cookie';
 import { LOGIN_GUEST, USER_GUEST_COOKIE } from '../../../models/user';
+import { CookieService } from '../../services/cookie.service';
 
 @Injectable()
 export class UserEffects {
@@ -22,7 +21,7 @@ export class UserEffects {
     this.#actions.pipe(
       ofType(getUserRemote),
       switchMap((data) => {
-        setTokenIntoCookie(this.#cookieService, data.token);
+        this.#cookieService.setTokenIntoCookie(data.token);
         return this.#userService.getUserByToken(data.token);
       }),
       map((user) => updateUser({ user })),
@@ -33,7 +32,7 @@ export class UserEffects {
     this.#actions.pipe(
       ofType(getUserGuest),
       switchMap(() => {
-        setTokenIntoCookie(this.#cookieService, USER_GUEST_COOKIE);
+        this.#cookieService.setTokenIntoCookie(USER_GUEST_COOKIE);
         return of({ userGuest: LOGIN_GUEST });
       }),
       map((userGuest) => setUserGuest(userGuest)),

@@ -1,12 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
 import { FakeStoreReducers } from '../shared/stores/app.reducers';
 import { removeUser } from '../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
-import { removeTokenFromCookie } from '../shared/utility/cookie';
+import { CookieService } from '../shared/services/cookie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +40,7 @@ export class AuthService {
 
   logout() {
     this.#store.dispatch(removeUser());
-    removeTokenFromCookie(this.#cookieService);
+    this.#cookieService.removeTokenFromCookie();
     this.#router.navigateByUrl('login');
   }
 }

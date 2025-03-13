@@ -31,10 +31,9 @@ import { Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getUser } from '../../shared/stores/user/user.selectors';
 import { validateFormGroup } from '../../shared/utility/functions';
-import { CookieService } from 'ngx-cookie-service';
-import { removeTokenFromCookie } from '../../shared/utility/cookie';
 import { LOGIN_GUEST } from '../../models/user';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
+import { CookieService } from '../../shared/services/cookie.service';
 
 @Component({
   selector: 'app-login',
@@ -74,7 +73,7 @@ export class LoginComponent implements OnDestroy {
   #cookieService: CookieService = inject(CookieService);
 
   constructor() {
-    removeTokenFromCookie(this.#cookieService);
+    this.#cookieService.removeTokenFromCookie();
     this.#store.dispatch(removeUser());
   }
 
