@@ -74,12 +74,12 @@ export const routes: Routes = [
     canActivate: [isUserLoggedGuard, hasCartProducts],
   },
   {
-    path: '**',
+    path: '',
+    pathMatch: 'full',
     redirectTo: 'shop/products',
   },
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '**',
+    path: '**',
+    redirectTo: 'shop/products',
   },
 ];
