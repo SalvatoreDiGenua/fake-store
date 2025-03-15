@@ -1,85 +1,42 @@
 import { Routes } from '@angular/router';
-import { hasCartProducts } from './guards/has-cart-products.guard';
-import { isUserLoggedGuard } from './guards/is-user-logged.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () =>
-      import('./features/login/login.component').then((m) => m.LoginComponent),
+    loadChildren: () => import('./features/login/login.routes'),
   },
   {
     path: 'sign-up',
-    loadComponent: () =>
-      import('./features/sign-up/sign-up.component').then(
-        (m) => m.SignUpComponent,
-      ),
+    loadChildren: () => import('./features/sign-up/sign-up.routes'),
   },
   {
     path: 'account',
-    loadComponent: () =>
-      import('./features/account/account.component').then(
-        (m) => m.AccountComponent,
-      ),
-    canActivate: [isUserLoggedGuard],
+    loadChildren: () => import('./features/account/account.routes'),
   },
   {
     path: 'shop',
-    pathMatch: 'full',
-    redirectTo: 'shop/products',
-  },
-  {
-    path: 'shop',
-    loadComponent: () =>
-      import('./features/shop/shop.component').then((m) => m.ShopComponent),
-    children: [
-      {
-        path: 'products',
-        loadComponent: () =>
-          import('./features/shop/components/products/products.component').then(
-            (m) => m.ProductsComponent,
-          ),
-        canActivate: [isUserLoggedGuard],
-      },
-      {
-        path: 'products/:idProduct/details',
-        loadComponent: () =>
-          import(
-            './features/shop/components/product-details/product-details.component'
-          ).then((m) => m.ProductDetailsComponent),
-        canActivate: [isUserLoggedGuard],
-      },
-    ],
+    loadChildren: () => import('./features/shop/shop.routes'),
   },
   {
     path: 'cart',
-    loadComponent: () =>
-      import('./features/cart/cart.component').then((m) => m.CartComponent),
-    canActivate: [isUserLoggedGuard],
+    loadChildren: () => import('./features/cart/cart.routes'),
   },
   {
     path: 'checkout',
-    loadComponent: () =>
-      import('./features/checkout/checkout.component').then(
-        (m) => m.CheckoutComponent,
-      ),
-    canActivate: [isUserLoggedGuard, hasCartProducts],
+    loadChildren: () => import('./features/checkout/checkout.routes'),
   },
   {
     path: 'order-confirmed',
-    loadComponent: () =>
-      import('./features/order-confirmed/order-confirmed.component').then(
-        (m) => m.OrderConfirmedComponent,
-      ),
-    canActivate: [isUserLoggedGuard, hasCartProducts],
-  },
-  {
-    path: '**',
-    redirectTo: 'shop/products',
+    loadChildren: () =>
+      import('./features/order-confirmed/order-confirmed.routes'),
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '**',
+    redirectTo: 'shop',
+  },
+  {
+    path: '**',
+    redirectTo: 'shop',
   },
 ];

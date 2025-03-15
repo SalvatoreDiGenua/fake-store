@@ -10,3 +10,12 @@ p-card,
     flex-direction: column;
   }
 }
+
+p-tree {
+  .p-tree-node-icon {
+    margin-right: 10px;
+  }
+  .p-tree-node-label {
+    width: 100%;
+  }
+}
