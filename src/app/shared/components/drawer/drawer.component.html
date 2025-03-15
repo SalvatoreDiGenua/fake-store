@@ -8,19 +8,23 @@
     <app-logo />
   </ng-template>
 
-  <p-tree [value]="treeNodes()">
-    <ng-template let-node pTemplate="default">
-      {{ node.label }}
-    </ng-template>
+  <p-tree
+    [value]="treeNodes()"
+    selectionMode="single"
+    [selection]="activeNode()"
+    (selectionChange)="activeNode.set($any($event))"
+  >
     <ng-template let-node pTemplate="url">
-      <a
-        class="p-button p-button-secondary p-button-text p-component"
-        [routerLink]="node.data.url"
-        [queryParams]="node.data?.queryParams"
-        (click)="toggleVisible(false)"
-      >
+      <div class="fake-store-drawer__url">
         {{ node.label }}
-      </a>
+        @if (node.data?.badge) {
+          <p-badge
+            [value]="node.data?.badge"
+            severity="info"
+            badgeSize="large"
+          />
+        }
+      </div>
     </ng-template>
   </p-tree>
 

@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   inject,
   signal,
   Signal,
@@ -13,15 +14,23 @@ import { getProductCategories } from '../../stores/products/products.selectors';
 import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
 import { Button } from 'primeng/button';
 import { AuthService } from '../../../services/auth.service';
 import { getUser } from '../../stores/user/user.selectors';
+import { getCartCount } from '../../stores/cart/cart.selectors';
+import { BadgeModule } from 'primeng/badge';
+
+interface FakeStoreTreeNode {
+  url: string;
+  queryParams?: Record<string, string>;
+  badge?: number;
+}
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, RouterLink, LogoComponent, Button],
+  imports: [DrawerModule, TreeModule, LogoComponent, Button, BadgeModule],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -31,14 +40,15 @@ export class DrawerComponent {
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #authService: AuthService = inject(AuthService);
   #confirmationService: ConfirmationService = inject(ConfirmationService);
+  #router: Router = inject(Router);
+  user = toSignal(this.#store.select(getUser));
   productCategories = toSignal(this.#store.pipe(select(getProductCategories)));
-  treeNodes: Signal<TreeNode[]> = computed(() => {
-    const _treeNodes: TreeNode<{
-      url: string;
-      queryParams?: Record<string, string>;
-    }>[] = [];
+  cartListCount = toSignal(this.#store.select(getCartCount));
+  activeNode = signal<TreeNode<FakeStoreTreeNode>>(null);
+  treeNodes: Signal<TreeNode<FakeStoreTreeNode>[]> = computed(() => {
+    const _treeNodes: TreeNode<FakeStoreTreeNode>[] = [];
     _treeNodes.push({
-      label: 'Product categories',
+      label: 'All categories',
       icon: PrimeIcons.SHOPPING_BAG,
       type: 'url',
       data: { url: '/products' },
@@ -53,11 +63,20 @@ export class DrawerComponent {
       label: 'Cart',
       icon: PrimeIcons.SHOPPING_CART,
       type: 'url',
-      data: { url: '/cart' },
+      data: { url: '/cart', badge: this.cartListCount() },
     });
     return _treeNodes;
   });
-  user = toSignal(this.#store.select(getUser));
+
+  activeNodeChanged = effect(() => {
+    if (!this.activeNode()) {
+      return;
+    }
+    this.#router.navigate([this.activeNode().data.url], {
+      queryParams: this.activeNode().data?.queryParams,
+    });
+    this.toggleVisible(false);
+  });
 
   toggleVisible(value: boolean) {
     this.visible.set(value);
