@@ -11,6 +11,29 @@ p-card,
   }
 }
 
+p-dataview,
+.p-dataview-content,
+.p-dataview-list,
+p-dataview-emptymessage {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  div:has(.p-dataview-emptymessage) {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.p-dataview-emptymessage {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 p-tree {
   .p-tree-node-icon {
     margin-right: 10px;
