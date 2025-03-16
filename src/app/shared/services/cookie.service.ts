@@ -19,6 +19,6 @@ export class CookieService {
   }
 
   removeTokenFromCookie() {
-    this.#ngxCookieService.delete(this.#KEY_FAKESTORE_COOKIE);
+    this.#ngxCookieService.delete(this.#KEY_FAKESTORE_COOKIE, '/');
   }
 }
