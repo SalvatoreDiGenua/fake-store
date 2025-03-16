@@ -14,7 +14,7 @@ import { getProductCategories } from '../../stores/products/products.selectors';
 import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
 import { Button } from 'primeng/button';
 import { AuthService } from '../../../services/auth.service';
@@ -30,7 +30,7 @@ interface FakeStoreTreeNode {
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, LogoComponent, Button, BadgeModule],
+  imports: [DrawerModule, TreeModule, LogoComponent, Button, BadgeModule, RouterLink],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,
