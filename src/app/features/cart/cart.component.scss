@@ -7,33 +7,6 @@
 .fake-store-cart {
   overflow: auto;
 
-  p-card,
-  .p-card,
-  .p-card-body,
-  .p-card-content,
-  .p-dataview-content,
-  p-dataview,
-  .p-dataview-list,
-  p-dataview-emptymessage {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-
-    div:has(.p-dataview-emptymessage) {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-    }
-  }
-
-  .p-dataview-emptymessage {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
   &__header {
     display: flex;
     justify-content: space-between;
@@ -66,27 +39,35 @@
 
   &__product {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-areas:
+      "image description quantity"
+      "image description trash";
+    grid-template-columns: 100px auto auto;
+    align-items: start;
     gap: 10px;
 
-    &-info {
-      height: 100%;
+    app-product-image {
+      grid-area: image;
+    }
+
+    &-description {
+      grid-area: description;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
-    &-row1 {
+    &-quantity {
+      grid-area: quantity;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      justify-content: flex-end;
+      gap: 5px;
     }
 
-    &-row2 {
+    &-trash {
+      grid-area: trash;
       display: flex;
       justify-content: flex-end;
-      gap: 10px;
     }
   }
 
@@ -108,6 +89,21 @@
       align-items: center;
       gap: 10px;
       justify-content: space-evenly;
+    }
+  }
+}
+
+@media (width <= 550px) {
+  .fake-store-cart {
+    &__product {
+      grid-template-areas:
+        "image description"
+        "quantity trash";
+      grid-template-columns: 100px auto;
+      &-quantity {
+        grid-area: quantity;
+        justify-content: unset;
+      }
     }
   }
 }

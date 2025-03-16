@@ -38,32 +38,28 @@
                 [urlImageProduct]="cartItem.image"
                 [sizeImageProduct]="100"
               ></app-product-image>
-              <div class="fake-store-cart__product-info">
-                <div class="fake-store-cart__product-row1">
-                  <div style="display: flex; flex-direction: column">
-                    <h3>{{ cartItem.title }}</h3>
-                    <small>{{ cartItem.category }}</small>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 5px">
-                    <h3>{{ cartItem.price | currency }}</h3>
-                    <p-button
-                      icon="pi pi-times"
-                      [badge]="cartItem.count"
-                      size="small"
-                      severity="secondary"
-                      [rounded]="true"
-                      (onClick)="showPopoverItemCartCount($event, cartItem.id)"
-                    />
-                  </div>
-                </div>
-                <div class="fake-store-cart__product-row2">
-                  <p-button
-                    icon="pi pi-trash"
-                    (onClick)="removeProductFromCart($event, cartItem)"
-                    severity="danger"
-                  />
-                </div>
+              <div class="fake-store-cart__product-description">
+                <h3>{{ cartItem.title }}</h3>
+                <small>{{ cartItem.category }}</small>
               </div>
+              <span class="fake-store-cart__product-quantity">
+                <h3>{{ cartItem.price | currency }}</h3>
+                <p-button
+                  icon="pi pi-times"
+                  [badge]="cartItem.count"
+                  size="small"
+                  severity="secondary"
+                  [rounded]="true"
+                  (onClick)="showPopoverItemCartCount($event, cartItem.id)"
+                />
+              </span>
+              <span class="fake-store-cart__product-trash">
+                <p-button
+                  icon="pi pi-trash"
+                  (onClick)="removeProductFromCart($event, cartItem)"
+                  severity="danger"
+                />
+              </span>
             </div>
             @if (!last) {
               <p-divider />
