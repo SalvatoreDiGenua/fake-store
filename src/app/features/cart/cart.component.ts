@@ -68,7 +68,7 @@ export class CartComponent {
       this.#store.select(getSingleItemCart(request.idCartItemPopover)),
     defaultValue: null,
   });
-  #localStorageService: LocalStorageService = inject(LocalStorageService); 
+  #localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
     this.#localStorageService.removeIdProductFromLocalStorage();

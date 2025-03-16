@@ -30,7 +30,14 @@ interface FakeStoreTreeNode {
 
 @Component({
   selector: 'app-drawer',
-  imports: [DrawerModule, TreeModule, LogoComponent, Button, BadgeModule, RouterLink],
+  imports: [
+    DrawerModule,
+    TreeModule,
+    LogoComponent,
+    Button,
+    BadgeModule,
+    RouterLink,
+  ],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss',
   encapsulation: ViewEncapsulation.None,
