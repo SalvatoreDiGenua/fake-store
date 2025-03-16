@@ -5,7 +5,8 @@ import { isUserLoggedGuard } from '../../guards/is-user-logged.guard';
 export const checkoutRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./checkout.component').then((m) => m.CheckoutComponent),
+    loadComponent: () =>
+      import('./checkout.component').then((m) => m.CheckoutComponent),
     canActivate: [isUserLoggedGuard, hasCartProducts],
   },
 ];
