@@ -24,6 +24,7 @@
     "@ngrx/store": "^19.0.1",
     "@ngrx/store-devtools": "^19.0.1",
     "@primeng/themes": "^19.0.9",
+    "dayjs": "^1.11.13",
     "i": "^0.3.7",
     "jwt-decode": "^4.0.0",
     "ngx-cookie-service": "^19.1.2",
