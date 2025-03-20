@@ -1,22 +1,33 @@
 import { createSelector } from '@ngrx/store';
 import { Product } from '../../../models/product';
 import { FakeStoreReducers } from '../app.reducers';
+import { PLACEHOLDER_PRODUCT } from '../../placeholder/placeholder-product';
 
 export const getProducts = (state: FakeStoreReducers): Product[] =>
   state.products || [];
 
-export const getProductCategories = createSelector(getProducts, (products) => [
-  ...products.reduce((acc, el) => acc.add(el.category), new Set<string>()),
-]);
+export const getProductCategories = createSelector(
+  getProducts,
+  (products): string[] => [
+    ...products.reduce((acc, el) => acc.add(el.category), new Set<string>()),
+  ],
+);
 
 export const getProductsByQuery = (query: string) =>
-  createSelector(getProducts, (products) =>
+  createSelector(getProducts, (products): Product[] =>
     products.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase()),
     ),
   );
 
 export const getProductsByCategory = (category: string) =>
-  createSelector(getProducts, (products) =>
+  createSelector(getProducts, (products): Product[] =>
     products.filter((el) => (category ? el.category === category : true)),
+  );
+
+export const getSingleProduct = (idProduct: number) =>
+  createSelector(
+    getProducts,
+    (products): Product =>
+      products.find((el) => el.id === idProduct) || PLACEHOLDER_PRODUCT,
   );
