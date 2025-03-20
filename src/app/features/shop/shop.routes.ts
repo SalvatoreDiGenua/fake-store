@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { isUserLoggedGuard } from '../../guards/is-user-logged.guard';
+import { shopTitleResolver } from './resolver/shop-title.resolver';
 
 export const loginRoutes: Routes = [
   {
@@ -25,6 +26,7 @@ export const loginRoutes: Routes = [
           import('./components/product-details/product-details.component').then(
             (m) => m.ProductDetailsComponent,
           ),
+        title: shopTitleResolver,
       },
     ],
     canActivate: [isUserLoggedGuard],
