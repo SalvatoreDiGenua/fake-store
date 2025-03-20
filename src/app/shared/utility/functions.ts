@@ -25,3 +25,11 @@ export const scrollIntoView = (element: HTMLElement, withAnimation = false) => {
 export const validateFormGroup = (formGroup: FormGroup) => {
   Object.values(formGroup.controls).forEach((el) => el.markAsDirty());
 };
+
+export const capitalizeString = (value: string): string => {
+  if (!value) {
+    return '';
+  }
+  const capitalizeFirstLetter = value[0].toUpperCase();
+  return `${capitalizeFirstLetter}${value.substring(1, value.length)}`;
+};
