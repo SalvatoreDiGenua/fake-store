@@ -31,5 +31,5 @@ export const capitalizeString = (value: string): string => {
     return '';
   }
   const capitalizeFirstLetter = value[0].toUpperCase();
-  return `${capitalizeFirstLetter}${value.substring(1, value.length)}`;
+  return `${capitalizeFirstLetter}${value.substring(1)}`;
 };
