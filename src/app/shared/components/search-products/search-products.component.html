@@ -1,0 +1,43 @@
+<div class="fake-store-search-products">
+  <div class="fake-store-search-products__search">
+    <p-iconfield>
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Search products"
+        [(ngModel)]="querySearchProduct"
+        [fluid]="true"
+        size="large"
+        variant="filled"
+      />
+    </p-iconfield>
+  </div>
+  <div class="fake-store-search-products__list-product">
+    <p-dataview [value]="filteredProductList.value()">
+      <ng-template #list let-items>
+        @for (product of items; track product.id; let last = $last) {
+          <p-button variant="text" severity="contrast" (click)="goIntoProductDetails(product)">
+            <div class="fake-store-search-products__item">
+              <app-product-image
+                [urlImageProduct]="product.image"
+                [sizeImageProduct]="50"
+                borderRadiusImageProduct="100%"
+              />
+              <span
+                [pTooltip]="product.title"
+                [showDelay]="500"
+                tooltipPosition="bottom"
+              >
+                {{ product.title }}
+              </span>
+            </div>
+          </p-button>
+          @if (!last) {
+            <p-divider />
+          }
+        }
+      </ng-template>
+    </p-dataview>
+  </div>
+</div>

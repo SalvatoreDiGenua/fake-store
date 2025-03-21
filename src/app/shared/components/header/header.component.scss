@@ -1,49 +1,16 @@
 .fake-store-header {
   padding: 10px;
 
-  .p-toolbar {
-    gap: 40px;
-
-    .p-toolbar-center {
-      flex: 1 1 auto;
-    }
-  }
-
-  &__back-button {
-    min-width: 150px;
-  }
-
-  p-autocomplete,
-  .p-autocomplete,
-  .p-autocomplete input {
-    width: 100%;
-    min-width: 100px;
-  }
-
-  &__autocomplete {
-    &-product {
-      display: grid;
-      align-items: center;
-      grid-template-columns: 30px 1fr;
-      gap: 15px;
-    }
+  &__start,
+  &__end {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
 
 @media (width <= 550px) {
   .fake-store-header {
     padding: 10px;
-
-    .p-toolbar {
-      gap: 0;
-      flex-wrap: nowrap;
-    }
-
-    &__back-button {
-      min-width: unset;
-      .p-button-label {
-        display: none;
-      }
-    }
   }
 }

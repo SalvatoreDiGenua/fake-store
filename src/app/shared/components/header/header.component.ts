@@ -1,75 +1,49 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, firstValueFrom } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { Button } from 'primeng/button';
-import {
-  AutoCompleteCompleteEvent,
-  AutoCompleteModule,
-} from 'primeng/autocomplete';
-import { ProductImageComponent } from '../product-image/product-image.component';
-import { Product } from '../../../models/product';
-import { Tooltip } from 'primeng/tooltip';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import { FakeStoreReducers } from '../../stores/app.reducers';
-import {
-  getProducts,
-  getProductsByQuery,
-} from '../../stores/products/products.selectors';
 import { DrawerComponent } from '../drawer/drawer.component';
+import { LogoComponent } from '../logo/logo.component';
+import { SearchProductsComponent } from '../search-products/search-products.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    ToolbarModule,
-    Button,
-    AutoCompleteModule,
-    ReactiveFormsModule,
-    ProductImageComponent,
-    Tooltip,
-    DrawerComponent,
-  ],
+  imports: [ToolbarModule, Button, DrawerComponent, LogoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   #router: Router = inject(Router);
-  routerEvents = toSignal(
-    this.#router.events.pipe(filter((e) => e instanceof NavigationEnd)),
-  );
-  autocompleteFormControl: FormControl = new FormControl<Product>(null);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
-  products = toSignal(this.#store.pipe(select(getProducts)));
-  filteredProductList = signal<Product[]>([]);
+  #dialogService: DialogService = inject(DialogService);
 
-  ngOnInit() {
-    this.autocompleteFormControl.valueChanges
-      .pipe(filter((value) => value !== null && typeof value === 'object'))
-      .subscribe(this.goIntoProductDetails);
-  }
+  isBackToListProductVisible = toSignal(
+    this.#router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      map(
+        (routerEvents) =>
+          routerEvents?.url.includes('account') ||
+          routerEvents?.url.includes('details') ||
+          routerEvents?.url.includes('cart'),
+      ),
+    ),
+  );
 
   backToProductList() {
     this.#router.navigateByUrl('shop/products');
   }
 
-  goIntoProductDetails = (product: Product) => {
-    this.#router.navigateByUrl(`shop/products/${product.id}/details`);
-  };
-
-  async completeMethod(autoCompleteCompleteEvent: AutoCompleteCompleteEvent) {
-    this.filteredProductList.set(
-      await firstValueFrom(
-        this.#store.select(getProductsByQuery(autoCompleteCompleteEvent.query)),
-      ),
-    );
+  showDialogSearchProducts() {
+    this.#dialogService.open(SearchProductsComponent, {
+      modal: true,
+      width: '60dvw',
+      height: '90dvh',
+      closeOnEscape: true,
+      showHeader: false,
+      dismissableMask: true
+    });
   }
 }

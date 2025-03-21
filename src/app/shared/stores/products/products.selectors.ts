@@ -16,7 +16,7 @@ export const getProductCategories = createSelector(
 export const getProductsByQuery = (query: string) =>
   createSelector(getProducts, (products): Product[] =>
     products.filter((product) =>
-      product.title.toLowerCase().includes(query.toLowerCase()),
+      query ? product.title.toLowerCase().includes(query.toLowerCase()) : false,
     ),
   );
 
