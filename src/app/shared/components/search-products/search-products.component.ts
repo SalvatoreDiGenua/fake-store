@@ -2,6 +2,7 @@ import {
   Component,
   HostBinding,
   inject,
+  OnInit,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -21,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-search-products',
@@ -33,18 +35,19 @@ import { ButtonModule } from 'primeng/button';
     ProductImageComponent,
     TooltipModule,
     DividerModule,
-    ButtonModule
+    ButtonModule,
   ],
   templateUrl: './search-products.component.html',
   styleUrl: './search-products.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class SearchProductsComponent {
+export class SearchProductsComponent implements OnInit {
   @HostBinding('class') class = 'host-fake-store-search-products';
 
   #dynamicDialogRef: DynamicDialogRef = inject(DynamicDialogRef);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #router: Router = inject(Router);
+  #localStorageService: LocalStorageService = inject(LocalStorageService);
 
   querySearchProduct = signal('');
   filteredProductList = rxResource({
@@ -53,10 +56,37 @@ export class SearchProductsComponent {
       this.#store.select(getProductsByQuery(request.query)),
     defaultValue: [],
   });
+  recentSearchProducts = signal<string[]>([]);
+
+  ngOnInit() {
+    this.refreshRecentSearchProducts();
+  }
 
   goIntoProductDetails(product: Product) {
+    this.addQueryIntoLocalStorage();
     this.#router.navigateByUrl(`shop/products/${product.id}/details`);
     this.closeDialogSearchProducts();
+  }
+
+  refreshRecentSearchProducts() {
+    this.recentSearchProducts.set(
+      this.#localStorageService.getQueriesFromLocalStorage(),
+    );
+  }
+
+  addQueryIntoLocalStorage() {
+    const currentQueries =
+      this.#localStorageService.getQueriesFromLocalStorage();
+    currentQueries.push(this.querySearchProduct());
+    this.#localStorageService.setQueriesIntoLocalStorage(currentQueries);
+    this.refreshRecentSearchProducts();
+  }
+
+  removeQueryFromLocalStorage(query: string) {
+    let currentQueries = this.#localStorageService.getQueriesFromLocalStorage();
+    currentQueries = currentQueries.filter((el) => el !== query);
+    this.#localStorageService.setQueriesIntoLocalStorage(currentQueries);
+    this.refreshRecentSearchProducts();
   }
 
   closeDialogSearchProducts() {
