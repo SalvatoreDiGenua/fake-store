@@ -15,13 +15,15 @@ export class ProductsBreadcrumbComponent {
     if (this.productCategory()) {
       _itemsBreadcrumb.push({
         label: this.productCategory(),
+        routerLink: `shop/products`,
+        queryParams: { productCategory: this.productCategory() },
       });
     }
     return _itemsBreadcrumb;
   });
   homeBreadcrumb: MenuItem = {
-    label: 'All categories',
+    label: 'All products',
     icon: PrimeIcons.SHOPPING_BAG,
-    routerLink: '/products',
+    routerLink: '/shop',
   };
 }

@@ -1,0 +1,77 @@
+<div class="fake-store-search-products">
+  <div class="fake-store-search-products__search">
+    <p-iconfield>
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Search products"
+        [(ngModel)]="querySearchProduct"
+        [fluid]="true"
+        size="large"
+        variant="filled"
+      />
+    </p-iconfield>
+  </div>
+  @if (filteredProductList.value().length > 0) {
+    <div class="fake-store-search-products__list-product">
+      <p-dataview [value]="filteredProductList.value()">
+        <ng-template #list let-items>
+          @for (product of items; track product.id; let last = $last) {
+            <p-button
+              variant="text"
+              severity="contrast"
+              (click)="goIntoProductDetails(product)"
+            >
+              <div class="fake-store-search-products__item">
+                <app-product-image
+                  [urlImageProduct]="product.image"
+                  [sizeImageProduct]="50"
+                  borderRadiusImageProduct="100%"
+                />
+                <span
+                  [pTooltip]="product.title"
+                  [showDelay]="500"
+                  tooltipPosition="bottom"
+                >
+                  {{ product.title }}
+                </span>
+              </div>
+            </p-button>
+            @if (!last) {
+              <p-divider />
+            }
+          }
+        </ng-template>
+      </p-dataview>
+    </div>
+  } @else if (querySearchProduct().length > 0) {
+    <h3 class="fake-store-search-products__empty">No products found</h3>
+  } @else if (recentSearchProducts().length === 0) {
+    <h3 class="fake-store-search-products__empty">No recent searches</h3>
+  } @else {
+    <div class="fake-store-search-products__recent">
+      @for (query of recentSearchProducts(); track query; let last = $last) {
+        <div class="fake-store-search-products__recent-query">
+          <p-button
+            variant="text"
+            severity="contrast"
+            icon="pi pi-history"
+            [label]="query"
+            (click)="querySearchProduct.set(query)"
+          />
+          <p-button
+            icon="pi pi-times"
+            severity="contrast"
+            [text]="true"
+            [rounded]="true"
+            (onClick)="removeQueryFromLocalStorage(query)"
+          />
+        </div>
+        @if (!last) {
+          <p-divider />
+        }
+      }
+    </div>
+  }
+</div>

@@ -55,7 +55,7 @@ export class DrawerComponent {
   treeNodes: Signal<TreeNode<FakeStoreTreeNode>[]> = computed(() => {
     const _treeNodes: TreeNode<FakeStoreTreeNode>[] = [];
     _treeNodes.push({
-      label: 'All categories',
+      label: 'All products',
       icon: PrimeIcons.SHOPPING_BAG,
       type: 'url',
       data: { url: '/products' },

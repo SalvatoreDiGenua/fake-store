@@ -24,7 +24,9 @@
         />
         <h1 class="product-title">{{ productDetailsValue.title }}</h1>
         <small class="product-category">
-          {{ productDetailsValue.category }}
+          <app-products-breadcrumb
+            [productCategory]="productDetailsValue.category"
+          />
         </small>
         <h1 class="product-price">
           {{ productDetailsValue.price | currency }}
