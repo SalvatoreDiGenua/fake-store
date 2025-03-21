@@ -13,6 +13,7 @@ import { addProductToCart } from '../../../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
 import { FieldsetModule } from 'primeng/fieldset';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { ProductsBreadcrumbComponent } from '../../../../shared/components/products-breadcrumb/products-breadcrumb.component';
 
 @Component({
   selector: 'app-product-details',
@@ -24,18 +25,20 @@ import { LocalStorageService } from '../../../../shared/services/local-storage.s
     Button,
     Skeleton,
     FieldsetModule,
+    ProductsBreadcrumbComponent,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent {
   idProduct = input.required<number>();
+
   #productsService: ProductsService = inject(ProductsService);
-  productDetails = this.#productsService.getSingleProduct(this.idProduct);
   #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
   #messageService: MessageService = inject(MessageService);
   #localStorageService: LocalStorageService = inject(LocalStorageService);
 
+  productDetails = this.#productsService.getSingleProduct(this.idProduct);
   setCurrentIdProductToScroll = effect(() => {
     if (this.productDetails.isLoading()) {
       return;

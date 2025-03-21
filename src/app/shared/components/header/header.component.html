@@ -3,15 +3,6 @@
     <ng-template #start>
       <div class="fake-store-header__start">
         <app-logo />
-        @if (isBackToListProductVisible()) {
-          <p-button
-            label="List product"
-            [rounded]="true"
-            severity="secondary"
-            icon="pi pi-angle-left"
-            (onClick)="backToProductList()"
-          />
-        }
       </div>
     </ng-template>
     <ng-template #end>
