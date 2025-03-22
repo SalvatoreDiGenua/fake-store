@@ -12,6 +12,13 @@
         variant="filled"
       />
     </p-iconfield>
+    <p-button
+      icon="pi pi-times"
+      [text]="true"
+      [rounded]="true"
+      severity="contrast"
+      (onClick)="closeDialogSearchProducts()"
+    />
   </div>
   @if (filteredProductList.value().length > 0) {
     <div class="fake-store-search-products__list-product">
