@@ -1,6 +1,6 @@
-<div class="fake-store-products fake-store-main-component-container">
-  <app-products-breadcrumb [productCategory]="productCategory()" />
-  <div class="fake-store-products__list">
+<div class="flex flex-col flex-[1_1_10px] overflow-auto p-5">
+  <app-products-breadcrumb [productCategory]="productCategory()" class="mb-5" />
+  <div class="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-6">
     @if (productsList.isLoading()) {
       @for (placeholder of productListPlaceholder; track $index) {
         <p-skeleton width="100%" height="400px" />
@@ -8,12 +8,12 @@
     } @else {
       @for (product of productsList.value(); track product.id) {
         <p-card
-          class="fake-store-card"
+          class="rounded-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer"
           [id]="'product-' + product.id"
           (click)="goToProductDetails(product.id)"
         >
           <ng-template #header>
-            <div class="fake-store-card__header">
+            <div class="rounded-t-md">
               <app-product-image
                 [urlImageProduct]="product.image"
               ></app-product-image>
@@ -21,7 +21,7 @@
           </ng-template>
           <ng-template #title> {{ product.title }} </ng-template>
           <ng-template #footer>
-            <h2 class="fake-store-card__footer">
+            <h2 class="text-right m-0 p-0">
               {{ product.price | currency }}
             </h2>
           </ng-template>
