@@ -1,7 +1,5 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../shared/stores/app.reducers';
 import {
   getUserGuest,
   getUserRemote,
@@ -10,9 +8,10 @@ import { getUser, isUserGuest } from '../shared/stores/user/user.selectors';
 import { firstValueFrom } from 'rxjs';
 import { USER_GUEST_COOKIE } from '../models/user';
 import { CookieService } from '../shared/services/cookie.service';
+import { APP_STORE } from '../shared/utility/injection-tokens';
 
 export const isUserLoggedGuard: CanActivateFn = async () => {
-  const store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  const store = inject(APP_STORE);
   const router = inject(Router);
   const cookieService: CookieService = inject(CookieService);
   const token = cookieService.getTokenFromCookie();
