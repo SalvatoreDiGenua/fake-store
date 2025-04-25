@@ -15,7 +15,7 @@ import Lara from '@primeng/themes/lara';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideAppStore as provideFakeAppStore_Store } from './shared/utility/providers';
+import { provideFakeAppStore_Store } from './shared/utility/providers';
 import { fakeStoreReducers } from './shared/stores/app.reducers';
 import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './shared/stores/products/products.effects';
