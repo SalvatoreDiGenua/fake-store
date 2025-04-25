@@ -7,13 +7,12 @@ import { CurrencyPipe } from '@angular/common';
 import { Button } from 'primeng/button';
 import { Product } from '../../../../models/product';
 import { MessageService } from 'primeng/api';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { addProductToCart } from '../../../../shared/stores/cart/cart.actions';
 import { Skeleton } from 'primeng/skeleton';
 import { FieldsetModule } from 'primeng/fieldset';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { ProductsBreadcrumbComponent } from '../../../../shared/components/products-breadcrumb/products-breadcrumb.component';
+import { APP_STORE } from '../../../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-product-details',
@@ -34,7 +33,7 @@ export class ProductDetailsComponent {
   idProduct = input.required<number>();
 
   #productsService: ProductsService = inject(ProductsService);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   #messageService: MessageService = inject(MessageService);
   #localStorageService: LocalStorageService = inject(LocalStorageService);
 

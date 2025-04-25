@@ -11,18 +11,17 @@ import { Skeleton } from 'primeng/skeleton';
 import { Card, CardModule } from 'primeng/card';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Product } from '../../../../models/product';
 import { ProductImageComponent } from '../../../../shared/components/product-image/product-image.component';
 import { ProductsBreadcrumbComponent } from '../../../../shared/components/products-breadcrumb/products-breadcrumb.component';
-import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { getProductsByCategory } from '../../../../shared/stores/products/products.selectors';
 import {
   isNullOrUndefined,
   scrollIntoView,
 } from '../../../../shared/utility/functions';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { APP_STORE } from '../../../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-products',
@@ -41,7 +40,7 @@ export class ProductsComponent {
   @HostBinding('class') class = 'host-fake-store-products';
   productCategory = input('');
   productsCardList = viewChildren<Card>(Card);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   productsList = rxResource<Product[], { productCategory: string }>({
     request: () => ({ productCategory: this.productCategory() }),
     loader: ({ request }) =>

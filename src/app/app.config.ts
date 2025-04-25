@@ -15,6 +15,7 @@ import Lara from '@primeng/themes/lara';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideAppStore as provideFakeAppStore_Store } from './shared/utility/providers';
 import { fakeStoreReducers } from './shared/stores/app.reducers';
 import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './shared/stores/products/products.effects';
@@ -22,7 +23,6 @@ import { httpRequestInterceptor } from './interceptors/http-request.interceptor'
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { UserEffects } from './shared/stores/user/user.effects';
 import { CookieService as NgxCookieServices } from 'ngx-cookie-service';
-
 import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
@@ -52,5 +52,6 @@ export const appConfig: ApplicationConfig = {
       name: 'FakeStore',
     }),
     provideEffects(ProductsEffects, UserEffects),
+    provideFakeAppStore_Store(),
   ],
 };

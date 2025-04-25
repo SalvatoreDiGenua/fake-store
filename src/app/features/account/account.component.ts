@@ -5,8 +5,6 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { getUser, isUserGuest } from '../../shared/stores/user/user.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Card } from 'primeng/card';
@@ -16,6 +14,7 @@ import { Tooltip } from 'primeng/tooltip';
 import { DialogService } from 'primeng/dynamicdialog';
 import { EditAccountComponent } from './components/edit-account/edit-account.component';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
+import { APP_STORE } from '../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-account',
@@ -26,7 +25,7 @@ import { AvatarComponent } from '../../shared/components/avatar/avatar.component
 })
 export class AccountComponent {
   @HostBinding('class') class = 'host-fake-store-account';
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   account = toSignal(this.#store.select(getUser));
   isUserGuest = toSignal(this.#store.select(isUserGuest));
   linkRoboHash = computed(() => {

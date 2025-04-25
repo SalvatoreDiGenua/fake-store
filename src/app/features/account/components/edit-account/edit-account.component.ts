@@ -7,12 +7,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TabsModule } from 'primeng/tabs';
-import { FakeStoreReducers } from '../../../../shared/stores/app.reducers';
 import { getUser } from '../../../../shared/stores/user/user.selectors';
 import {
   FormControl,
@@ -25,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { UserService } from '../../../../services/user.service';
 import { UpdateUserPayload } from '../../../../models/user';
 import { Subscription } from 'rxjs';
+import { APP_STORE } from '../../../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-edit-account',
@@ -54,7 +53,7 @@ export class EditAccountComponent implements OnDestroy {
     },
   ];
   #dynamicDialogRef: DynamicDialogRef = inject(DynamicDialogRef);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   account = toSignal(this.#store.select(getUser));
   formEditAccount = new FormGroup({
     username: new FormControl('', Validators.required),

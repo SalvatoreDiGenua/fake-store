@@ -1,11 +1,10 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Button } from 'primeng/button';
-import { FakeStoreReducers } from '../../stores/app.reducers';
 import { getCartCount } from '../../stores/cart/cart.selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { APP_STORE } from '../../utility/injection-tokens';
 
 @Component({
   selector: 'app-button-cart',
@@ -15,7 +14,7 @@ import { filter } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonCartComponent {
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   cartCount = toSignal(this.#store.select(getCartCount));
   #router: Router = inject(Router);
   routerEvents = toSignal(

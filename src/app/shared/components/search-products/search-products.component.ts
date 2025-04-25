@@ -11,9 +11,7 @@ import { getProductsByQuery } from '../../stores/products/products.selectors';
 import { Product } from '../../../models/product';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { FakeStoreReducers } from '../../stores/app.reducers';
 import { ProductImageComponent } from '../product-image/product-image.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -23,6 +21,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { APP_STORE } from '../../utility/injection-tokens';
 
 @Component({
   selector: 'app-search-products',
@@ -45,7 +44,7 @@ export class SearchProductsComponent implements OnInit {
   @HostBinding('class') class = 'host-fake-store-search-products';
 
   #dynamicDialogRef: DynamicDialogRef = inject(DynamicDialogRef);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   #router: Router = inject(Router);
   #localStorageService: LocalStorageService = inject(LocalStorageService);
 

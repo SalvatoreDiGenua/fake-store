@@ -8,10 +8,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { select, Store } from '@ngrx/store';
+import { select } from '@ngrx/store';
 import { TreeNode, PrimeIcons, ConfirmationService } from 'primeng/api';
 import { getProductCategories } from '../../stores/products/products.selectors';
-import { FakeStoreReducers } from '../../stores/app.reducers';
 import { DrawerModule } from 'primeng/drawer';
 import { TreeModule } from 'primeng/tree';
 import { Router, RouterLink } from '@angular/router';
@@ -21,6 +20,7 @@ import { AuthService } from '../../../services/auth.service';
 import { getUser } from '../../stores/user/user.selectors';
 import { getCartCount } from '../../stores/cart/cart.selectors';
 import { BadgeModule } from 'primeng/badge';
+import { APP_STORE } from '../../utility/injection-tokens';
 
 interface FakeStoreTreeNode {
   url: string;
@@ -44,7 +44,7 @@ interface FakeStoreTreeNode {
 })
 export class DrawerComponent {
   visible = signal(false);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   #authService: AuthService = inject(AuthService);
   #confirmationService: ConfirmationService = inject(ConfirmationService);
   #router: Router = inject(Router);

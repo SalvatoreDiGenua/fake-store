@@ -14,9 +14,8 @@ import { Toolbar } from 'primeng/toolbar';
 import { map, timer } from 'rxjs';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { TruckComponent } from '../../shared/components/truck/truck.component';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import { resetCart } from '../../shared/stores/cart/cart.actions';
+import { APP_STORE } from '../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-order-confirmed',
@@ -29,7 +28,7 @@ export class OrderConfirmedComponent {
   @HostBinding('class') class = 'host-fake-store-order-confirmed';
   timerFinished = toSignal(timer(5000).pipe(map(() => true)));
   isOrderMaking = computed(() => (this.timerFinished() ? false : true));
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   resetCartEffect = effect(() => {
     if (this.isOrderMaking()) {
       return;

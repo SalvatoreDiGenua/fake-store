@@ -20,8 +20,7 @@ import { Button } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
+import { select } from '@ngrx/store';
 import {
   getUserGuest,
   getUserRemote,
@@ -34,6 +33,7 @@ import { validateFormGroup } from '../../shared/utility/functions';
 import { LOGIN_GUEST } from '../../models/user';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
 import { CookieService } from '../../shared/services/cookie.service';
+import { APP_STORE } from '../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +53,7 @@ import { CookieService } from '../../shared/services/cookie.service';
 })
 export class LoginComponent implements OnDestroy {
   @HostBinding('class') class = 'host-fake-store-login';
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   formLogin = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),

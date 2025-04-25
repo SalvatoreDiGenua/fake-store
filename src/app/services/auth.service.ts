@@ -1,11 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../shared/stores/app.reducers';
 import { removeUser } from '../shared/stores/user/user.actions';
 import { Router } from '@angular/router';
 import { CookieService } from '../shared/services/cookie.service';
+import { APP_STORE } from '../shared/utility/injection-tokens';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ import { CookieService } from '../shared/services/cookie.service';
 export class AuthService {
   #AUTH_URL = `${environment.BASE_URL}/auth/login`;
   #httpClient: HttpClient = inject(HttpClient);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   #cookieService: CookieService = inject(CookieService);
   #router: Router = inject(Router);
 

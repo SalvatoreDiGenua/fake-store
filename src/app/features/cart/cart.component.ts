@@ -6,8 +6,6 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { FakeStoreReducers } from '../../shared/stores/app.reducers';
 import {
   getCartCount,
   getCartGrouped,
@@ -33,6 +31,7 @@ import { Popover, PopoverModule } from 'primeng/popover';
 import { ItemCart } from '../../models/itemCart';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
+import { APP_STORE } from '../../shared/utility/injection-tokens';
 
 @Component({
   selector: 'app-cart',
@@ -55,7 +54,7 @@ import { LocalStorageService } from '../../shared/services/local-storage.service
 export class CartComponent {
   @HostBinding('class') class = 'host-fake-store-cart';
   popoverRef = viewChild(Popover);
-  #store: Store<FakeStoreReducers> = inject(Store<FakeStoreReducers>);
+  #store = inject(APP_STORE);
   cartList = toSignal(this.#store.select(getCartGrouped));
   cartListCount = toSignal(this.#store.select(getCartCount));
   cartTotalToSpend = toSignal(this.#store.select(getCartTotalToSpend));
