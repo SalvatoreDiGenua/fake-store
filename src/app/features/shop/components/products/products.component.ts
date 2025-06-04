@@ -42,9 +42,8 @@ export class ProductsComponent {
   productsCardList = viewChildren<Card>(Card);
   #store = inject(APP_STORE);
   productsList = rxResource<Product[], { productCategory: string }>({
-    request: () => ({ productCategory: this.productCategory() }),
-    loader: ({ request }) =>
-      this.#store.select(getProductsByCategory(request.productCategory)),
+    stream: () =>
+      this.#store.select(getProductsByCategory(this.productCategory())),
     defaultValue: [],
   });
   productListPlaceholder = Array(10);

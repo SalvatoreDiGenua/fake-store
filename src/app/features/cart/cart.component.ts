@@ -62,9 +62,8 @@ export class CartComponent {
   #confirmationService: ConfirmationService = inject(ConfirmationService);
   idCartItemPopover = signal<number>(-1);
   cartItemPopover = rxResource({
-    request: () => ({ idCartItemPopover: this.idCartItemPopover() }),
-    loader: ({ request }) =>
-      this.#store.select(getSingleItemCart(request.idCartItemPopover)),
+    stream: () =>
+      this.#store.select(getSingleItemCart(this.idCartItemPopover())),
     defaultValue: null,
   });
   #localStorageService: LocalStorageService = inject(LocalStorageService);

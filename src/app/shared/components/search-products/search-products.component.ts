@@ -50,9 +50,8 @@ export class SearchProductsComponent implements OnInit {
 
   querySearchProduct = signal('');
   filteredProductList = rxResource({
-    request: () => ({ query: this.querySearchProduct() }),
-    loader: ({ request }) =>
-      this.#store.select(getProductsByQuery(request.query)),
+    stream: () =>
+      this.#store.select(getProductsByQuery(this.querySearchProduct())),
     defaultValue: [],
   });
   recentSearchProducts = signal<string[]>([]);

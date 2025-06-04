@@ -1,4 +1,4 @@
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Product } from '../models/product';
@@ -13,17 +13,14 @@ export class ProductsService {
   #httpClient: HttpClient = inject(HttpClient);
 
   getAllProducts(withLoader = true) {
-    return httpResource<Product[]>(
-      {
-        url: this.#PRODUCTS_URL,
-        method: 'GET',
-        withCredentials: false,
-        params: { withLoader },
-      },
-      {
-        defaultValue: [],
-      },
-    );
+    return rxResource<Product[], { idProduct: number }>({
+      stream: () =>
+        this.#httpClient.get<Product[]>(this.#PRODUCTS_URL, {
+          withCredentials: false,
+          params: { withLoader },
+        }),
+      defaultValue: [],
+    });
   }
 
   getAllProductsRx(withLoader = true) {
@@ -35,15 +32,11 @@ export class ProductsService {
 
   getSingleProduct(idProduct: Signal<number>, withLoader = false) {
     return rxResource<Product, { idProduct: number }>({
-      request: () => ({ idProduct: idProduct() }),
-      loader: ({ request }) =>
-        this.#httpClient.get<Product>(
-          `${this.#PRODUCTS_URL}/${request.idProduct}`,
-          {
-            withCredentials: false,
-            params: { withLoader },
-          },
-        ),
+      stream: () =>
+        this.#httpClient.get<Product>(`${this.#PRODUCTS_URL}/${idProduct()}`, {
+          withCredentials: false,
+          params: { withLoader },
+        }),
       defaultValue: PLACEHOLDER_PRODUCT,
     });
   }
